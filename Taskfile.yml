@@ -1,0 +1,7 @@
+version: "3"
+
+tasks:
+  run:bot:
+    desc: Run the Slowbot Discord bot
+    cmds:
+      - go run ./cmd/bot
