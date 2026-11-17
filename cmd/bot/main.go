@@ -7,12 +7,12 @@ import (
 	"os/signal"
 	"syscall"
 
+	"github.com/charmingruby/alomobot/config"
 	"github.com/charmingruby/erebor/discord"
 	"github.com/charmingruby/erebor/discord/command"
 	"github.com/charmingruby/erebor/discord/mention"
 	"github.com/charmingruby/erebor/env"
 	"github.com/charmingruby/erebor/o11y/logging"
-	"github.com/charmingruby/slowbot/config"
 )
 
 func main() {
@@ -23,7 +23,7 @@ func main() {
 	ctx = logging.WithLogger(ctx, log)
 
 	if err := run(ctx); err != nil {
-		log.ErrorContext(ctx, "slowbot discord bot failed", "error", err)
+		log.ErrorContext(ctx, "alomobot discord bot failed", "error", err)
 		os.Exit(1)
 	}
 }

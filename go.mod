@@ -1,4 +1,4 @@
-module github.com/charmingruby/slowbot
+module github.com/charmingruby/alomobot
 
 go 1.27.0
 
