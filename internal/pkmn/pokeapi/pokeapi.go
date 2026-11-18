@@ -28,7 +28,7 @@ func New() *PokeAPI {
 	}
 }
 
-func (p *PokeAPI) GetPokemonByDexID(ctx context.Context, dexID int) (*pkmn.Pokemon, error) {
+func (p *PokeAPI) GetPokemonByDexID(ctx context.Context, dexID int) (pkmn.Pokemon, error) {
 	poke, err := httpx.Do[data.Pokemon](ctx, p.client, httpx.Request{
 		URL:            fmt.Sprintf("/pokemon/%d", dexID),
 		ExpectedStatus: http.StatusOK,
@@ -39,10 +39,10 @@ func (p *PokeAPI) GetPokemonByDexID(ctx context.Context, dexID int) (*pkmn.Pokem
 			"error", err,
 		)
 
-		return nil, fmt.Errorf("%w: %w", ErrPokemonNotFound, err)
+		return pkmn.Pokemon{}, fmt.Errorf("%w: %w", ErrPokemonNotFound, err)
 	}
 
-	return &pkmn.Pokemon{
+	return pkmn.Pokemon{
 		ID:        poke.ID,
 		Name:      poke.Name,
 		SpriteURL: poke.Sprites.FrontDefault,

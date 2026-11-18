@@ -1,6 +1,7 @@
 package core
 
 import (
+	"context"
 	"math/rand"
 
 	"github.com/charmingruby/alomobot/internal/pkmn"
@@ -18,6 +19,6 @@ var generations = []pkmn.Generation{
 	pkmn.GenerationIX,
 }
 
-func FlipGeneration() pkmn.Generation {
+func FlipGeneration(_ context.Context) pkmn.Generation {
 	return generations[rand.Intn(len(generations))]
 }

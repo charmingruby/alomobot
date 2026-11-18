@@ -1,6 +1,7 @@
 package core
 
 import (
+	"context"
 	"math/rand"
 
 	"github.com/charmingruby/alomobot/internal/pkmn"
@@ -19,6 +20,6 @@ var regions = []pkmn.Region{
 	pkmn.RegionPaldea,
 }
 
-func FlipRegion() pkmn.Region {
+func FlipRegion(_ context.Context) pkmn.Region {
 	return regions[rand.Intn(len(regions))]
 }

@@ -2,15 +2,17 @@ package cmd
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/charmingruby/alomobot/internal/core"
 	"github.com/charmingruby/alomobot/internal/pkmn"
+	"github.com/charmingruby/alomobot/internal/pkmn/pokeapi"
 	"github.com/charmingruby/erebor/discord/command"
 )
 
 var ()
 
-func FlipDef() command.Definition {
+func FlipDef(api *pokeapi.PokeAPI) command.Definition {
 	resouceParam := "resource"
 
 	choices := []*command.Choice{
@@ -62,17 +64,22 @@ func FlipDef() command.Definition {
 
 					switch kind {
 					case pkmn.ResourceType:
-						return core.FlipType().String(), nil
+						return core.FlipType(ctx).String(), nil
 					case pkmn.ResourceCup:
 						return "todo", nil
 					case pkmn.ResourcePokemon:
-						return "todo", nil
+						poke, err := core.FlipPokemon(ctx, api)
+						if err != nil {
+							return "", err
+						}
+
+						return fmt.Sprintf("%s#%d", poke.Name, poke.ID), nil
 					case pkmn.ResourceTeam:
 						return "todo", nil
 					case pkmn.ResourceGeneration:
-						return core.FlipGeneration().String(), nil
+						return core.FlipGeneration(ctx).String(), nil
 					case pkmn.ResourceRegion:
-						return core.FlipRegion().String(), nil
+						return core.FlipRegion(ctx).String(), nil
 					}
 				}
 			}

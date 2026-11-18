@@ -1,6 +1,7 @@
 package core
 
 import (
+	"context"
 	"math/rand"
 
 	"github.com/charmingruby/alomobot/internal/pkmn"
@@ -27,6 +28,6 @@ var types = []pkmn.Type{
 	pkmn.TypeFairy,
 }
 
-func FlipType() pkmn.Type {
+func FlipType(_ context.Context) pkmn.Type {
 	return types[rand.Intn(len(types))]
 }
