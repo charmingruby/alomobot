@@ -8,9 +8,8 @@ import (
 	"syscall"
 
 	"github.com/charmingruby/alomobot/config"
+	"github.com/charmingruby/alomobot/internal/misc"
 	"github.com/charmingruby/erebor/discord"
-	"github.com/charmingruby/erebor/discord/command"
-	"github.com/charmingruby/erebor/discord/mention"
 	"github.com/charmingruby/erebor/env"
 	"github.com/charmingruby/erebor/o11y/logging"
 )
@@ -36,36 +35,15 @@ func run(ctx context.Context) error {
 
 	bot, err := discord.NewBot(
 		cfg.DiscordBotToken,
-		discord.WithErrorMessage("Slowbot está na má vontade, rs..."),
-		discord.WithMentionReplyHandler(func(ctx context.Context, m mention.Message) (string, error) {
-			return "kkkk", nil
-		}),
+		discord.WithCommandGuild(cfg.DiscordGuildID),
+		discord.WithErrorMessage("Blublublub..."),
 	)
 	if err != nil {
 		return fmt.Errorf("create discord bot: %w", err)
 	}
 
-	if err := bot.RegisterCommand(command.Definition{
-		Name:        "flip",
-		Description: "Executa o flip do Slowbot.",
-		Handler: func(ctx context.Context, i command.Interaction) (string, error) {
-			for _, opt := range i.Options {
-				if opt.Name == "type" {
-					return opt.StringValue(), nil
-				}
-			}
-
-			return "Normal", nil
-		},
-		Parameters: []*command.Parameter{
-			command.String(command.Parameter{
-				Name:        "type",
-				Description: "Tipo de flip.",
-				Required:    true,
-			}),
-		},
-	}); err != nil {
-		return fmt.Errorf("register flip command: %w", err)
+	if err := misc.RegisterCommands(bot); err != nil {
+		return fmt.Errorf("failed to register misc commands: %w", err)
 	}
 
 	return bot.Listen(ctx)
