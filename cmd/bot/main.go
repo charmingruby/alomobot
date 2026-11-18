@@ -8,7 +8,7 @@ import (
 	"syscall"
 
 	"github.com/charmingruby/alomobot/config"
-	"github.com/charmingruby/alomobot/internal/misc"
+	"github.com/charmingruby/alomobot/internal/cmd"
 	"github.com/charmingruby/erebor/discord"
 	"github.com/charmingruby/erebor/env"
 	"github.com/charmingruby/erebor/o11y/logging"
@@ -42,7 +42,7 @@ func run(ctx context.Context) error {
 		return fmt.Errorf("create discord bot: %w", err)
 	}
 
-	if err := misc.RegisterCommands(bot); err != nil {
+	if err := cmd.Register(bot); err != nil {
 		return fmt.Errorf("failed to register misc commands: %w", err)
 	}
 

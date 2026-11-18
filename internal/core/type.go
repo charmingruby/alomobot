@@ -1,4 +1,4 @@
-package pkmn
+package core
 
 import "math/rand"
 

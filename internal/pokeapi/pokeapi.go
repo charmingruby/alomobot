@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/charmingruby/alomobot/internal/pkmn"
+	"github.com/charmingruby/alomobot/internal/core"
 	"github.com/charmingruby/alomobot/internal/pokeapi/data"
 	"github.com/charmingruby/erebor/httpx"
 	"github.com/charmingruby/erebor/o11y/logging"
@@ -28,7 +28,7 @@ func New() *PokeAPI {
 	}
 }
 
-func (p *PokeAPI) GetPokemonByDexID(ctx context.Context, dexID int) (*pkmn.Pokemon, error) {
+func (p *PokeAPI) GetPokemonByDexID(ctx context.Context, dexID int) (*core.Pokemon, error) {
 	poke, err := httpx.Do[data.Pokemon](ctx, p.client, httpx.Request{
 		URL:            fmt.Sprintf("/pokemon/%d", dexID),
 		ExpectedStatus: http.StatusOK,
@@ -42,7 +42,7 @@ func (p *PokeAPI) GetPokemonByDexID(ctx context.Context, dexID int) (*pkmn.Pokem
 		return nil, fmt.Errorf("%w: %w", ErrPokemonNotFound, err)
 	}
 
-	return &pkmn.Pokemon{
+	return &core.Pokemon{
 		ID:        poke.ID,
 		Name:      poke.Name,
 		SpriteURL: poke.Sprites.FrontDefault,
