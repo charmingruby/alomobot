@@ -1,4 +1,4 @@
-package core
+package pkmn
 
 type Pokemon struct {
 	ID        int    `json:"id"`

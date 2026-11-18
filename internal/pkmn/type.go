@@ -1,6 +1,4 @@
-package core
-
-import "math/rand"
+package pkmn
 
 type Type string
 
@@ -25,27 +23,6 @@ const (
 	TypeFairy    Type = "fairy"
 )
 
-var types = []Type{
-	TypeNormal,
-	TypeFire,
-	TypeWater,
-	TypeElectric,
-	TypeGrass,
-	TypeIce,
-	TypeFighting,
-	TypePoison,
-	TypeGround,
-	TypeFlying,
-	TypePsychic,
-	TypeBug,
-	TypeRock,
-	TypeGhost,
-	TypeDragon,
-	TypeDark,
-	TypeSteel,
-	TypeFairy,
-}
-
-func RandomType() Type {
-	return types[rand.Intn(len(types))]
+func (t Type) String() string {
+	return string(t)
 }

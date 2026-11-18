@@ -1,4 +1,4 @@
-package core
+package pkmn
 
 type Region string
 

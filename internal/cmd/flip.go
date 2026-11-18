@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/charmingruby/alomobot/internal/core"
+	"github.com/charmingruby/alomobot/internal/pkmn"
 	"github.com/charmingruby/erebor/discord/command"
 )
 
@@ -14,28 +15,28 @@ func FlipDef() command.Definition {
 
 	choices := []*command.Choice{
 		{
-			Name:  core.ResourceType.String(),
-			Value: core.ResourceType,
+			Name:  pkmn.ResourceType.String(),
+			Value: pkmn.ResourceType,
 		},
 		{
-			Name:  core.ResourceCup.String(),
-			Value: core.ResourceCup,
+			Name:  pkmn.ResourceCup.String(),
+			Value: pkmn.ResourceCup,
 		},
 		{
-			Name:  core.ResourcePokemon.String(),
-			Value: core.ResourcePokemon,
+			Name:  pkmn.ResourcePokemon.String(),
+			Value: pkmn.ResourcePokemon,
 		},
 		{
-			Name:  core.ResourceTeam.String(),
-			Value: core.ResourceTeam,
+			Name:  pkmn.ResourceTeam.String(),
+			Value: pkmn.ResourceTeam,
 		},
 		{
-			Name:  core.ResourceGeneration.String(),
-			Value: core.ResourceGeneration,
+			Name:  pkmn.ResourceGeneration.String(),
+			Value: pkmn.ResourceGeneration,
 		},
 		{
-			Name:  core.ResourceRegion.String(),
-			Value: core.ResourceRegion,
+			Name:  pkmn.ResourceRegion.String(),
+			Value: pkmn.ResourceRegion,
 		},
 	}
 
@@ -53,7 +54,7 @@ func FlipDef() command.Definition {
 		Handler: func(ctx context.Context, i command.Interaction) (string, error) {
 			for _, opt := range i.Options {
 				if opt.Name == resouceParam {
-					kind := core.Resource(opt.Value.(string))
+					kind := pkmn.Resource(opt.Value.(string))
 
 					if !kind.Valid() {
 						return "", ErrNonexistentKind
@@ -62,17 +63,17 @@ func FlipDef() command.Definition {
 					println(kind)
 
 					switch kind {
-					case core.ResourceType:
-						return string(core.RandomType()), nil
-					case core.ResourceCup:
+					case pkmn.ResourceType:
+						return core.FlipType().String(), nil
+					case pkmn.ResourceCup:
 						return "todo", nil
-					case core.ResourcePokemon:
+					case pkmn.ResourcePokemon:
 						return "todo", nil
-					case core.ResourceTeam:
+					case pkmn.ResourceTeam:
 						return "todo", nil
-					case core.ResourceGeneration:
+					case pkmn.ResourceGeneration:
 						return "todo", nil
-					case core.ResourceRegion:
+					case pkmn.ResourceRegion:
 						return "todo", nil
 					}
 				}
