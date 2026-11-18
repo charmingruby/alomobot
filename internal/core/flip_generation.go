@@ -1,0 +1,23 @@
+package core
+
+import (
+	"math/rand"
+
+	"github.com/charmingruby/alomobot/internal/pkmn"
+)
+
+var generations = []pkmn.Generation{
+	pkmn.GenerationI,
+	pkmn.GenerationII,
+	pkmn.GenerationIII,
+	pkmn.GenerationIV,
+	pkmn.GenerationV,
+	pkmn.GenerationVI,
+	pkmn.GenerationVII,
+	pkmn.GenerationVIII,
+	pkmn.GenerationIX,
+}
+
+func FlipGeneration() pkmn.Generation {
+	return generations[rand.Intn(len(generations))]
+}

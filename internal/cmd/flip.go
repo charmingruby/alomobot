@@ -60,8 +60,6 @@ func FlipDef() command.Definition {
 						return "", ErrNonexistentKind
 					}
 
-					println(kind)
-
 					switch kind {
 					case pkmn.ResourceType:
 						return core.FlipType().String(), nil
@@ -72,9 +70,9 @@ func FlipDef() command.Definition {
 					case pkmn.ResourceTeam:
 						return "todo", nil
 					case pkmn.ResourceGeneration:
-						return "todo", nil
+						return core.FlipGeneration().String(), nil
 					case pkmn.ResourceRegion:
-						return "todo", nil
+						return core.FlipRegion().String(), nil
 					}
 				}
 			}
