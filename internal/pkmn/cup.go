@@ -8,7 +8,7 @@ const (
 	CupDexLastNumber    Cup = "dex last number"
 	CupCharactersAmount Cup = "characters amount"
 	CupRental           Cup = "rental"
-	CupGeneration       Cup = "generation"
+	CupGen              Cup = "gen"
 	CupMonotype         Cup = "monotype"
 	CupRandomParty      Cup = "random party"
 	CupBooster          Cup = "booster"
@@ -23,7 +23,7 @@ var Cups = []Cup{
 	CupDexLastNumber,
 	CupCharactersAmount,
 	CupRental,
-	CupGeneration,
+	CupGen,
 	CupMonotype,
 	CupRandomParty,
 	CupBooster,

@@ -6,10 +6,11 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/charmingruby/alomobot/internal/pkmn"
-	"github.com/charmingruby/alomobot/internal/pkmn/pokeapi/data"
 	"github.com/charmingruby/erebor/httpx"
 	"github.com/charmingruby/erebor/o11y/logging"
+
+	"github.com/charmingruby/alomobot/internal/pkmn"
+	"github.com/charmingruby/alomobot/internal/pkmn/pokeapi/data"
 )
 
 const url = "https://pokeapi.co/api/v2"

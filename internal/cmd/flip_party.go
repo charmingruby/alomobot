@@ -5,8 +5,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/charmingruby/alomobot/internal/core"
 	"github.com/charmingruby/erebor/discord/command"
+
+	"github.com/charmingruby/alomobot/internal/core"
 )
 
 func FlipPartyDef() command.Definition {
@@ -24,6 +25,7 @@ func FlipPartyDef() command.Definition {
 				if idx > 0 {
 					message.WriteString("\n")
 				}
+
 				fmt.Fprintf(&message, "%d. %s#%d", idx+1, p.Name, p.ID)
 			}
 

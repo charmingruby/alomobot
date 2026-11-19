@@ -7,12 +7,13 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/charmingruby/alomobot/config"
-	"github.com/charmingruby/alomobot/internal/cmd"
-	"github.com/charmingruby/alomobot/internal/pkmn/pokeapi"
 	"github.com/charmingruby/erebor/discord"
 	"github.com/charmingruby/erebor/env"
 	"github.com/charmingruby/erebor/o11y/logging"
+
+	"github.com/charmingruby/alomobot/config"
+	"github.com/charmingruby/alomobot/internal/cmd"
+	"github.com/charmingruby/alomobot/internal/pkmn/pokeapi"
 )
 
 func main() {

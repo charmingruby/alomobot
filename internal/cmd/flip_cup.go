@@ -3,8 +3,9 @@ package cmd
 import (
 	"context"
 
-	"github.com/charmingruby/alomobot/internal/core"
 	"github.com/charmingruby/erebor/discord/command"
+
+	"github.com/charmingruby/alomobot/internal/core"
 )
 
 func FlipCupDef() command.Definition {

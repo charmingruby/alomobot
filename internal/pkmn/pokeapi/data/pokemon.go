@@ -1,9 +1,9 @@
 package data
 
 type Pokemon struct {
-	ID      int     `json:"id"`
 	Name    string  `json:"name"`
 	Sprites Sprites `json:"sprites"`
+	ID      int     `json:"id"`
 }
 
 type Sprites struct {

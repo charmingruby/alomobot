@@ -7,6 +7,6 @@ import (
 	"github.com/charmingruby/alomobot/internal/pkmn"
 )
 
-func FlipRegion(_ context.Context) pkmn.Region {
-	return pkmn.Regions[rand.Intn(len(pkmn.Regions))]
+func FlipGen(_ context.Context) pkmn.Gen {
+	return pkmn.Gens[rand.Intn(len(pkmn.Gens))]
 }

@@ -11,8 +11,7 @@ func Register(b *discord.Bot) error {
 		FlipCupDef(),
 		FlipPokemonDef(),
 		FlipPartyDef(),
-		FlipGenerationDef(),
-		FlipRegionDef(),
+		FlipGenDef(),
 		FlipLeagueDef(),
 	}
 

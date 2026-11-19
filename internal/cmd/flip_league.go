@@ -5,8 +5,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/charmingruby/alomobot/internal/core"
 	"github.com/charmingruby/erebor/discord/command"
+
+	"github.com/charmingruby/alomobot/internal/core"
 )
 
 func FlipLeagueDef() command.Definition {
