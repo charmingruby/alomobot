@@ -14,6 +14,18 @@ const (
 	GenerationIX   Generation = "IX"
 )
 
+var Generations = []Generation{
+	GenerationI,
+	GenerationII,
+	GenerationIII,
+	GenerationIV,
+	GenerationV,
+	GenerationVI,
+	GenerationVII,
+	GenerationVIII,
+	GenerationIX,
+}
+
 func (g Generation) Valid() bool {
 	switch g {
 	case GenerationI, GenerationII, GenerationIII, GenerationIV, GenerationV,

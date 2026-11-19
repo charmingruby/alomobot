@@ -16,6 +16,7 @@ func Register(b *discord.Bot) error {
 		FlipPartyDef(api),
 		FlipGenerationDef(),
 		FlipRegionDef(),
+		FlipLeagueDef(),
 	}
 
 	for _, def := range definitions {

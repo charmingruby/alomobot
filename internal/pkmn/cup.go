@@ -14,7 +14,23 @@ const (
 	CupBooster          Cup = "booster"
 	CupNoEvo            Cup = "no evo"
 	CupSingleType       Cup = "single type"
+	CupStandard         Cup = "standard"
 )
+
+var Cups = []Cup{
+	CupAsh,
+	CupLittle,
+	CupDexLastNumber,
+	CupCharactersAmount,
+	CupRental,
+	CupGeneration,
+	CupMonotype,
+	CupRandomParty,
+	CupBooster,
+	CupNoEvo,
+	CupSingleType,
+	CupStandard,
+}
 
 func (c Cup) String() string {
 	return string(c)

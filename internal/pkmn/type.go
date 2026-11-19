@@ -23,6 +23,27 @@ const (
 	TypeFairy    Type = "fairy"
 )
 
+var Types = []Type{
+	TypeNormal,
+	TypeFire,
+	TypeWater,
+	TypeElectric,
+	TypeGrass,
+	TypeIce,
+	TypeFighting,
+	TypePoison,
+	TypeGround,
+	TypeFlying,
+	TypePsychic,
+	TypeBug,
+	TypeRock,
+	TypeGhost,
+	TypeDragon,
+	TypeDark,
+	TypeSteel,
+	TypeFairy,
+}
+
 func (t Type) String() string {
 	return string(t)
 }

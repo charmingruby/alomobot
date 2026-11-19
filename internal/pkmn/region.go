@@ -15,6 +15,19 @@ const (
 	RegionPaldea Region = "Paldea"
 )
 
+var Regions = []Region{
+	RegionKanto,
+	RegionJohto,
+	RegionHoenn,
+	RegionSinnoh,
+	RegionUnova,
+	RegionKalos,
+	RegionAlola,
+	RegionGalar,
+	RegionHisui,
+	RegionPaldea,
+}
+
 func (r Region) Valid() bool {
 	switch r {
 	case RegionKanto, RegionJohto, RegionHoenn, RegionSinnoh, RegionUnova,
