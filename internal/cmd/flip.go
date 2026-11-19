@@ -3,6 +3,7 @@ package cmd
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/charmingruby/alomobot/internal/core"
 	"github.com/charmingruby/alomobot/internal/pkmn"
@@ -29,8 +30,8 @@ func FlipDef(api *pokeapi.PokeAPI) command.Definition {
 			Value: pkmn.ResourcePokemon,
 		},
 		{
-			Name:  pkmn.ResourceTeam.String(),
-			Value: pkmn.ResourceTeam,
+			Name:  pkmn.ResourceParty.String(),
+			Value: pkmn.ResourceParty,
 		},
 		{
 			Name:  pkmn.ResourceGeneration.String(),
@@ -74,8 +75,22 @@ func FlipDef(api *pokeapi.PokeAPI) command.Definition {
 						}
 
 						return fmt.Sprintf("%s#%d", poke.Name, poke.ID), nil
-					case pkmn.ResourceTeam:
-						return "todo", nil
+					case pkmn.ResourceParty:
+						team, err := core.FlipParty(ctx, api)
+						if err != nil {
+							return "", err
+						}
+
+						message := strings.Builder{}
+						for idx, p := range team {
+							message.WriteString(fmt.Sprintf("%d. %s#%d", idx+1, p.Name, p.ID))
+
+							if idx < len(team)-1 {
+								message.WriteString("\n")
+							}
+						}
+
+						return message.String(), nil
 					case pkmn.ResourceGeneration:
 						return core.FlipGeneration(ctx).String(), nil
 					case pkmn.ResourceRegion:
