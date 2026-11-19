@@ -1,7 +1,7 @@
 version: "3"
 
 tasks:
-  run:bot:
+  default:
     desc: Run the Slowbot Discord bot
     cmds:
-      - go run ./cmd/bot
+      - air
