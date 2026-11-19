@@ -2,7 +2,6 @@ package core
 
 import (
 	"context"
-	"math/rand"
 
 	"github.com/charmingruby/alomobot/internal/pkmn"
 	"github.com/charmingruby/alomobot/internal/pkmn/pokeapi"
@@ -15,7 +14,7 @@ func FlipParty(ctx context.Context, api *pokeapi.PokeAPI) ([]pkmn.Pokemon, error
 	unique := make(map[int]struct{}, partySize)
 
 	for len(party) < 6 {
-		p, err := api.GetPokemonByDexID(ctx, rand.Intn(pkmn.NationalDexCount))
+		p, err := api.GetPokemonByDexID(ctx, pkmn.RandomNationalDexID())
 		if err != nil {
 			return nil, err
 		}
