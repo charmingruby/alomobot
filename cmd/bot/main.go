@@ -9,6 +9,7 @@ import (
 
 	"github.com/charmingruby/alomobot/config"
 	"github.com/charmingruby/alomobot/internal/cmd"
+	"github.com/charmingruby/alomobot/internal/pkmn/pokeapi"
 	"github.com/charmingruby/erebor/discord"
 	"github.com/charmingruby/erebor/env"
 	"github.com/charmingruby/erebor/o11y/logging"
@@ -20,6 +21,7 @@ func main() {
 
 	log := logging.InitLogger()
 	ctx = logging.WithLogger(ctx, log)
+	ctx = pokeapi.WithPokeAPI(ctx, pokeapi.New())
 
 	if err := run(ctx); err != nil {
 		log.ErrorContext(ctx, "alomobot discord bot failed", "error", err)

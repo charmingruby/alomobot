@@ -1,19 +1,16 @@
 package cmd
 
 import (
-	"github.com/charmingruby/alomobot/internal/pkmn/pokeapi"
 	"github.com/charmingruby/erebor/discord"
 	"github.com/charmingruby/erebor/discord/command"
 )
 
 func Register(b *discord.Bot) error {
-	api := pokeapi.New()
-
 	definitions := []command.Definition{
 		FlipTypeDef(),
 		FlipCupDef(),
-		FlipPokemonDef(api),
-		FlipPartyDef(api),
+		FlipPokemonDef(),
+		FlipPartyDef(),
 		FlipGenerationDef(),
 		FlipRegionDef(),
 		FlipLeagueDef(),

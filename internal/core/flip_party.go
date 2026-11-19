@@ -9,7 +9,8 @@ import (
 
 const partySize = 6
 
-func FlipParty(ctx context.Context, api *pokeapi.PokeAPI) ([]pkmn.Pokemon, error) {
+func FlipParty(ctx context.Context) ([]pkmn.Pokemon, error) {
+	api := pokeapi.PokeAPIFromContext(ctx)
 	party := make([]pkmn.Pokemon, 0, partySize)
 	unique := make(map[int]struct{}, partySize)
 
