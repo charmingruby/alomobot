@@ -3,33 +3,57 @@ package cmd
 import (
 	"context"
 	"fmt"
-	"strings"
 
 	"github.com/charmingruby/erebor/discord/command"
 
+	"github.com/charmingruby/alomobot/internal/cmd/message"
 	"github.com/charmingruby/alomobot/internal/core"
+	"github.com/charmingruby/alomobot/internal/format"
 )
 
 func FlipPartyDef() command.Definition {
+	benchParam := "bench"
+
 	return command.Definition{
 		Name:        "flip-party",
 		Description: "Flips a random Pokémon party",
-		Handler: func(ctx context.Context, _ command.Interaction) (string, error) {
-			team, err := core.FlipParty(ctx)
+		Parameters: []*command.Parameter{
+			command.Integer(command.Parameter{
+				Name:        benchParam,
+				Description: "Number of reserve Pokémon to include",
+			}),
+		},
+		Handler: func(ctx context.Context, i command.Interaction) (string, error) {
+			filter := core.FlipPartyFilter{}
+
+			for _, opt := range i.Options {
+				switch opt.Name {
+				case benchParam:
+					filter.Bench = int(opt.IntValue())
+				}
+			}
+
+			party, bench, err := core.FlipParty(ctx, filter)
 			if err != nil {
 				return "", err
 			}
 
-			var message strings.Builder
-			for idx, p := range team {
-				if idx > 0 {
-					message.WriteString("\n")
-				}
+			partyDs := format.List(party)
+			content := fmt.Sprintf("**Party** (6/6)\n%s\n",
+				partyDs,
+			)
 
-				fmt.Fprintf(&message, "%d. %s#%d", idx+1, p.Name, p.ID)
+			if len(bench) == 0 {
+				return message.Flip("party", content), nil
 			}
 
-			return message.String(), nil
+			benchDs := format.List(bench)
+			content += fmt.Sprintf("\n**Bench** (%d)\n%s",
+				len(bench),
+				benchDs,
+			)
+
+			return message.Flip("party", content), nil
 		},
 	}
 }

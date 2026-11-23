@@ -3,7 +3,7 @@ package pkmn
 import (
 	"fmt"
 
-	"github.com/charmingruby/alomobot/internal/text"
+	"github.com/charmingruby/alomobot/internal/format"
 )
 
 type Type string
@@ -55,5 +55,5 @@ func (t Type) String() string {
 }
 
 func (t Type) Render() string {
-	return fmt.Sprintf("`%s`", text.Capitalize(t.String()))
+	return fmt.Sprintf("`%s`", format.Capitalize(t.String()))
 }

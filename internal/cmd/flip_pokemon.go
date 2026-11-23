@@ -5,6 +5,7 @@ import (
 
 	"github.com/charmingruby/erebor/discord/command"
 
+	"github.com/charmingruby/alomobot/internal/cmd/message"
 	"github.com/charmingruby/alomobot/internal/core"
 )
 
@@ -18,7 +19,7 @@ func FlipPokemonDef() command.Definition {
 				return "", err
 			}
 
-			return poke.Render(), nil
+			return message.Flip("Pokémon", poke.Render()), nil
 		},
 	}
 }

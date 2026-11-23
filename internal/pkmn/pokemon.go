@@ -3,7 +3,7 @@ package pkmn
 import (
 	"fmt"
 
-	"github.com/charmingruby/alomobot/internal/text"
+	"github.com/charmingruby/alomobot/internal/format"
 )
 
 type Pokemon struct {
@@ -22,7 +22,7 @@ func (p Pokemon) Render() string {
 
 	return fmt.Sprintf("**#%d — %s** • %s",
 		p.ID,
-		text.Capitalize(p.Name),
+		format.Capitalize(p.Name),
 		typeContent,
 	)
 }
