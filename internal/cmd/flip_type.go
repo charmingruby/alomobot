@@ -9,7 +9,7 @@ import (
 	"github.com/charmingruby/alomobot/internal/core"
 )
 
-func FlipTypeDef() command.Definition {
+func flipType() command.Definition {
 	return command.Definition{
 		Name:        "flip-type",
 		Description: "Flips a random Pokémon type",

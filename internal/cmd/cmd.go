@@ -1,23 +1,25 @@
 package cmd
 
 import (
+	"fmt"
+
 	"github.com/charmingruby/erebor/discord"
 	"github.com/charmingruby/erebor/discord/command"
 )
 
 func Register(b *discord.Bot) error {
-	definitions := []command.Definition{
-		FlipTypeDef(),
-		FlipCupDef(),
-		FlipPokemonDef(),
-		FlipPartyDef(),
-		FlipGenDef(),
-		FlipLeagueDef(),
+	defs := []command.Definition{
+		flipType(),
+		flipCup(),
+		flipPokemon(),
+		flipParty(),
+		flipGen(),
+		flipLeague(),
 	}
 
-	for _, def := range definitions {
+	for _, def := range defs {
 		if err := b.RegisterCommand(def); err != nil {
-			return err
+			return fmt.Errorf("register command %q: %w", def.Name, err)
 		}
 	}
 

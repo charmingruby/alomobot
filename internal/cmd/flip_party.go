@@ -11,8 +11,8 @@ import (
 	"github.com/charmingruby/alomobot/internal/format"
 )
 
-func FlipPartyDef() command.Definition {
-	benchParam := "bench"
+func flipParty() command.Definition {
+	const benchParam = "bench"
 
 	return command.Definition{
 		Name:        "flip-party",

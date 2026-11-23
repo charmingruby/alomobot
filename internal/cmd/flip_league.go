@@ -11,9 +11,11 @@ import (
 	"github.com/charmingruby/alomobot/internal/format"
 )
 
-func FlipLeagueDef() command.Definition {
-	cupsParam := "cups"
-	repeatableParam := "repeatable"
+func flipLeague() command.Definition {
+	const (
+		cupsParam       = "cups"
+		repeatableParam = "repeatable"
+	)
 
 	return command.Definition{
 		Name:        "flip-league",

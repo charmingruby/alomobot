@@ -9,7 +9,7 @@ import (
 	"github.com/charmingruby/alomobot/internal/core"
 )
 
-func FlipCupDef() command.Definition {
+func flipCup() command.Definition {
 	return command.Definition{
 		Name:        "flip-cup",
 		Description: "Flips a random cup",
