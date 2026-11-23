@@ -2,7 +2,6 @@ package core
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/charmingruby/alomobot/internal/pkmn"
 )
@@ -24,8 +23,6 @@ func (f FlipLeagueFilter) Normalize() FlipLeagueFilter {
 
 func FlipLeague(ctx context.Context, filter FlipLeagueFilter) []pkmn.Cup {
 	league := make([]pkmn.Cup, 0, filter.Cups+1)
-
-	fmt.Printf("%+v\n", filter)
 
 	var unique map[pkmn.Cup]struct{}
 	if !filter.Repeatable {

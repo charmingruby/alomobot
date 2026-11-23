@@ -1,5 +1,11 @@
 package pkmn
 
+import (
+	"fmt"
+
+	"github.com/charmingruby/alomobot/internal/text"
+)
+
 type Type string
 
 const (
@@ -46,4 +52,8 @@ var Types = []Type{
 
 func (t Type) String() string {
 	return string(t)
+}
+
+func (t Type) Render() string {
+	return fmt.Sprintf("`%s`", text.Capitalize(t.String()))
 }

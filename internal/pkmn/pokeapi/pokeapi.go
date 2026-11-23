@@ -43,9 +43,24 @@ func (p *PokeAPI) GetPokemonByDexID(ctx context.Context, dexID int) (pkmn.Pokemo
 		return pkmn.Pokemon{}, fmt.Errorf("%w: %w", ErrPokemonNotFound, err)
 	}
 
+	var primaryType pkmn.Type
+	var secondaryType *pkmn.Type
+
+	for _, t := range poke.Types {
+		if t.Slot == 1 {
+			primaryType = pkmn.Type(t.Type.Name)
+			continue
+		}
+
+		st := pkmn.Type(t.Type.Name)
+		secondaryType = &st
+	}
+
 	return pkmn.Pokemon{
-		ID:        poke.ID,
-		Name:      poke.Name,
-		SpriteURL: poke.Sprites.FrontDefault,
+		ID:            poke.ID,
+		Name:          poke.Name,
+		PrimaryType:   primaryType,
+		SecondaryType: secondaryType,
+		SpriteURL:     poke.Sprites.FrontDefault,
 	}, nil
 }

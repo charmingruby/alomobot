@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/charmingruby/erebor/discord/command"
 
@@ -19,7 +18,7 @@ func FlipPokemonDef() command.Definition {
 				return "", err
 			}
 
-			return fmt.Sprintf("%s#%d", poke.Name, poke.ID), nil
+			return poke.Render(), nil
 		},
 	}
 }
