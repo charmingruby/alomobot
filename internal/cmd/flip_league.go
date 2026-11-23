@@ -4,42 +4,38 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/charmingruby/erebor/discord/command"
+	"github.com/charmingruby/erebor/discord/api"
 
 	"github.com/charmingruby/alomobot/internal/cmd/message"
 	"github.com/charmingruby/alomobot/internal/core"
 	"github.com/charmingruby/alomobot/internal/format"
 )
 
-func flipLeague() command.Definition {
+func flipLeague() api.Command {
 	const (
 		cupsParam       = "cups"
 		repeatableParam = "repeatable"
 	)
 
-	return command.Definition{
-		Name:        "flip-league",
+	return api.Command{
+		Name:        "league",
 		Description: "Flips a random league of cups",
-		Parameters: []*command.Parameter{
-			command.Integer(command.Parameter{
+		Parameters: []api.Parameter{
+			{
+				Type:        api.ParameterInteger,
 				Name:        cupsParam,
 				Description: "Number of cups before the finals",
-			}),
-			command.Boolean(command.Parameter{
+			},
+			{
+				Type:        api.ParameterBoolean,
 				Name:        repeatableParam,
 				Description: "Allow repeated cups",
-			}),
+			},
 		},
-		Handler: func(ctx context.Context, i command.Interaction) (string, error) {
-			filter := core.FlipLeagueFilter{}
-
-			for _, opt := range i.Options {
-				switch opt.Name {
-				case cupsParam:
-					filter.Cups = int(opt.IntValue())
-				case repeatableParam:
-					filter.Repeatable = opt.BoolValue()
-				}
+		Handler: func(ctx context.Context, i api.Interaction) (api.Response, error) {
+			filter := core.FlipLeagueFilter{
+				Cups:       int(i.Integer(cupsParam)),
+				Repeatable: i.Boolean(repeatableParam),
 			}
 
 			filter = filter.Normalize()
@@ -48,7 +44,7 @@ func flipLeague() command.Definition {
 
 			content := fmt.Sprintf("**League**(%d)\n%s", len(league), format.List(league))
 
-			return message.Flip("league", content), nil
+			return api.Response{Content: message.Flip("league", content)}, nil
 		},
 	}
 }

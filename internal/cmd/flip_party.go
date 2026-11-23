@@ -4,38 +4,34 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/charmingruby/erebor/discord/command"
+	"github.com/charmingruby/erebor/discord/api"
 
 	"github.com/charmingruby/alomobot/internal/cmd/message"
 	"github.com/charmingruby/alomobot/internal/core"
 	"github.com/charmingruby/alomobot/internal/format"
 )
 
-func flipParty() command.Definition {
+func flipParty() api.Command {
 	const benchParam = "bench"
 
-	return command.Definition{
-		Name:        "flip-party",
+	return api.Command{
+		Name:        "party",
 		Description: "Flips a random Pokémon party",
-		Parameters: []*command.Parameter{
-			command.Integer(command.Parameter{
+		Parameters: []api.Parameter{
+			{
+				Type:        api.ParameterInteger,
 				Name:        benchParam,
 				Description: "Number of reserve Pokémon to include",
-			}),
+			},
 		},
-		Handler: func(ctx context.Context, i command.Interaction) (string, error) {
-			filter := core.FlipPartyFilter{}
-
-			for _, opt := range i.Options {
-				switch opt.Name {
-				case benchParam:
-					filter.Bench = int(opt.IntValue())
-				}
+		Handler: func(ctx context.Context, i api.Interaction) (api.Response, error) {
+			filter := core.FlipPartyFilter{
+				Bench: int(i.Integer(benchParam)),
 			}
 
 			party, bench, err := core.FlipParty(ctx, filter)
 			if err != nil {
-				return "", err
+				return api.Response{}, err
 			}
 
 			partyDs := format.List(party)
@@ -43,8 +39,16 @@ func flipParty() command.Definition {
 				partyDs,
 			)
 
+			partyPokesURL := make([]string, 0, 6)
+			for _, p := range party {
+				partyPokesURL = append(partyPokesURL, p.SpriteURL)
+			}
+
 			if len(bench) == 0 {
-				return message.Flip("party", content), nil
+				return api.Response{
+					Content:   message.Flip("party", content),
+					ImageURLs: partyPokesURL,
+				}, nil
 			}
 
 			benchDs := format.List(bench)
@@ -53,7 +57,10 @@ func flipParty() command.Definition {
 				benchDs,
 			)
 
-			return message.Flip("party", content), nil
+			return api.Response{
+				Content:   message.Flip("party", content),
+				ImageURLs: partyPokesURL,
+			}, nil
 		},
 	}
 }

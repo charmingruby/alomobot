@@ -2,7 +2,7 @@ module github.com/charmingruby/alomobot
 
 go 1.27.0
 
-require github.com/charmingruby/erebor v0.0.7
+require github.com/charmingruby/erebor v0.0.10
 
 require (
 	github.com/bwmarrin/discordgo v0.29.0 // indirect

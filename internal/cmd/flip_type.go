@@ -3,18 +3,18 @@ package cmd
 import (
 	"context"
 
-	"github.com/charmingruby/erebor/discord/command"
+	"github.com/charmingruby/erebor/discord/api"
 
 	"github.com/charmingruby/alomobot/internal/cmd/message"
 	"github.com/charmingruby/alomobot/internal/core"
 )
 
-func flipType() command.Definition {
-	return command.Definition{
-		Name:        "flip-type",
+func flipType() api.Command {
+	return api.Command{
+		Name:        "type",
 		Description: "Flips a random Pokémon type",
-		Handler: func(ctx context.Context, _ command.Interaction) (string, error) {
-			return message.Flip("type", core.FlipType(ctx).Render()), nil
+		Handler: func(ctx context.Context, _ api.Interaction) (api.Response, error) {
+			return api.Response{Content: message.Flip("type", core.FlipType(ctx).Render())}, nil
 		},
 	}
 }

@@ -2,8 +2,8 @@ github.com/bwmarrin/discordgo v0.29.0 h1:FmWeXFaKUwrcL3Cx65c20bTRW+vOb6k8AnaP+Eg
 github.com/bwmarrin/discordgo v0.29.0/go.mod h1:NJZpH+1AfhIcyQsPeuBKsUtYrRnjkyu0kIVMCHkZtRY=
 github.com/caarlos0/env v3.5.0+incompatible h1:Yy0UN8o9Wtr/jGHZDpCBLpNrzcFLLM2yixi/rBrKyJs=
 github.com/caarlos0/env v3.5.0+incompatible/go.mod h1:tdCsowwCzMLdkqRYDlHpZCp2UooDD3MspDBjZ2AD02Y=
-github.com/charmingruby/erebor v0.0.7 h1:UvW1EEB9ZE3I5VN/331On67ZREOdNyJck2nen0bYeks=
-github.com/charmingruby/erebor v0.0.7/go.mod h1:bjh8UqoJKeNiAiDAflT00HLdvVUCxXfMIZ23pSR2smY=
+github.com/charmingruby/erebor v0.0.10 h1:roGG5mMNc/RSfdU6zRAI6fVPkKJx0HfQBS2oyFuSSI8=
+github.com/charmingruby/erebor v0.0.10/go.mod h1:bjh8UqoJKeNiAiDAflT00HLdvVUCxXfMIZ23pSR2smY=
 github.com/gabriel-vasile/mimetype v1.4.16 h1:5izNFuvA37st1dDRAcA7TtmngBmRgiIPDmTtiEvjx1E=
 github.com/gabriel-vasile/mimetype v1.4.16/go.mod h1:3oFFwxX8kTklZwzIl2aQEDZT0lKY8xH92ST88bAwba4=
 github.com/go-chi/chi/v5 v5.5.0 h1:xdKQ1dJmVJsmgahrXSKhUx8NyVPzpwdlyrrQFpMPJgg=

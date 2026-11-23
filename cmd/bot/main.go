@@ -36,17 +36,14 @@ func run(ctx context.Context) error {
 		return fmt.Errorf("load config: %w", err)
 	}
 
-	bot, err := discord.NewBot(
+	bot, err := discord.New(
 		cfg.DiscordBotToken,
+		discord.WithCommands(cmd.Commands()...),
 		discord.WithCommandGuild(cfg.DiscordGuildID),
 		discord.WithErrorMessage("Blublublub..."),
 	)
 	if err != nil {
 		return fmt.Errorf("create discord bot: %w", err)
-	}
-
-	if err := cmd.Register(bot); err != nil {
-		return fmt.Errorf("failed to register misc commands: %w", err)
 	}
 
 	return bot.Listen(ctx)
