@@ -1,5 +1,11 @@
 package pkmn
 
+import (
+	"fmt"
+
+	"github.com/charmingruby/alomobot/internal/format"
+)
+
 type Region string
 
 const (
@@ -107,4 +113,8 @@ var Gens = []Gen{
 
 func (g Gen) Valid() bool {
 	return g.Number >= 1 && g.Number <= 9
+}
+
+func (g Gen) Render() string {
+	return fmt.Sprintf("**Generation %s** • %s", format.Number(g.Number), g.Region.String())
 }

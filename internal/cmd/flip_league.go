@@ -3,11 +3,12 @@ package cmd
 import (
 	"context"
 	"fmt"
-	"strings"
 
 	"github.com/charmingruby/erebor/discord/command"
 
+	"github.com/charmingruby/alomobot/internal/cmd/message"
 	"github.com/charmingruby/alomobot/internal/core"
+	"github.com/charmingruby/alomobot/internal/format"
 )
 
 func FlipLeagueDef() command.Definition {
@@ -43,16 +44,9 @@ func FlipLeagueDef() command.Definition {
 
 			league := core.FlipLeague(ctx, filter)
 
-			var message strings.Builder
-			for idx, r := range league {
-				if idx > 0 {
-					message.WriteString("\n")
-				}
+			content := fmt.Sprintf("**League**(%d)\n%s", len(league), format.List(league))
 
-				fmt.Fprintf(&message, "%d. %s", idx+1, r.String())
-			}
-
-			return message.String(), nil
+			return message.Flip("league", content), nil
 		},
 	}
 }
