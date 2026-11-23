@@ -3,25 +3,25 @@ package pkmn
 type Cup string
 
 const (
-	CupAsh              Cup = "Ash's Cup"
-	CupLittle           Cup = "Little Cup"
-	CupDexLastNumber    Cup = "Dex Last Number Cup"
-	CupCharactersAmount Cup = "Characters Amount Cup"
-	CupRental           Cup = "Rental Cup"
-	CupMonogen          Cup = "Monogen Cup"
-	CupMonotype         Cup = "Monotype Cup"
-	CupRandomParty      Cup = "Random Party Cup"
-	CupBooster          Cup = "Booster Cup"
-	CupNoEvo            Cup = "No Evo Cup"
-	CupSingleType       Cup = "Single Type Cup"
-	CupStandard         Cup = "Standard Cup"
+	CupAsh         Cup = "Ash's Cup"
+	CupLittle      Cup = "Little Cup"
+	CupLetter      Cup = "Letter Cup"
+	CupRental      Cup = "Rental Cup"
+	CupMonogen     Cup = "Monogen Cup"
+	CupMonotype    Cup = "Monotype Cup"
+	CupRandomParty Cup = "Random Party Cup"
+	CupBooster     Cup = "Booster Cup"
+	CupNoEvo       Cup = "No Evo Cup"
+	CupSingleType  Cup = "Single Type Cup"
+	CupStarter     Cup = "Starter Cup"
+	CupChaos       Cup = "Chaos Cup"
+	CupStandard    Cup = "Standard Cup"
 )
 
 var Cups = []Cup{
 	CupAsh,
 	CupLittle,
-	CupDexLastNumber,
-	CupCharactersAmount,
+	CupLetter,
 	CupRental,
 	CupMonogen,
 	CupMonotype,
@@ -30,6 +30,8 @@ var Cups = []Cup{
 	CupNoEvo,
 	CupSingleType,
 	CupStandard,
+	CupStarter,
+	CupChaos,
 }
 
 func (c Cup) String() string {
