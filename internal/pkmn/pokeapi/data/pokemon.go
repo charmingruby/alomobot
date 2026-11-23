@@ -8,7 +8,11 @@ type Pokemon struct {
 }
 
 type Sprites struct {
-	FrontDefault string `json:"front_default"`
+	Other struct {
+		OfficialArtwork struct {
+			FrontDefault string `json:"front_default"`
+		} `json:"official-artwork"`
+	} `json:"other"`
 }
 
 type Type struct {

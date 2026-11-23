@@ -61,6 +61,6 @@ func (p *PokeAPI) GetPokemonByDexID(ctx context.Context, dexID int) (pkmn.Pokemo
 		Name:          poke.Name,
 		PrimaryType:   primaryType,
 		SecondaryType: secondaryType,
-		SpriteURL:     poke.Sprites.FrontDefault,
+		SpriteURL:     poke.Sprites.Other.OfficialArtwork.FrontDefault,
 	}, nil
 }
