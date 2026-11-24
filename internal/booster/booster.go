@@ -1,4 +1,4 @@
-package pkmn
+package booster
 
 import "context"
 

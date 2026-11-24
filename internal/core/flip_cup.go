@@ -4,9 +4,9 @@ import (
 	"context"
 	"math/rand"
 
-	"github.com/charmingruby/alomobot/internal/pkmn"
+	"github.com/charmingruby/alomobot/internal/cup"
 )
 
-func FlipCup(_ context.Context) pkmn.Cup {
-	return pkmn.Cups[rand.Intn(len(pkmn.Cups))]
+func FlipCup(_ context.Context) cup.Cup {
+	return cup.Cups[rand.Intn(len(cup.Cups))]
 }

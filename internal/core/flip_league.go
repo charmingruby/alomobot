@@ -3,7 +3,7 @@ package core
 import (
 	"context"
 
-	"github.com/charmingruby/alomobot/internal/pkmn"
+	"github.com/charmingruby/alomobot/internal/cup"
 )
 
 const standardLeagueSize = 8
@@ -18,36 +18,37 @@ func (f FlipLeagueFilter) Normalize() FlipLeagueFilter {
 		return f
 	}
 
-	if f.Cups > len(pkmn.Cups) || f.Cups <= 0 {
+	if f.Cups > len(cup.Cups) || f.Cups <= 0 {
 		f.Cups = standardLeagueSize
 	}
 
 	return f
 }
 
-func FlipLeague(ctx context.Context, filter FlipLeagueFilter) []pkmn.Cup {
-	league := make([]pkmn.Cup, 0, filter.Cups)
+func FlipLeague(ctx context.Context, filter FlipLeagueFilter) []cup.Cup {
+	league := make([]cup.Cup, 0, filter.Cups)
 
-	var unique map[pkmn.Cup]struct{}
+	var unique map[cup.NameCup]struct{}
 	if !filter.Repeatable {
-		unique = make(map[pkmn.Cup]struct{}, filter.Cups)
+		unique = make(map[cup.NameCup]struct{}, filter.Cups)
 	}
 
 	for len(league) < filter.Cups-1 {
 		cup := FlipCup(ctx)
 
 		if !filter.Repeatable {
-			if _, ok := unique[cup]; ok {
+			if _, ok := unique[cup.Name]; ok {
 				continue
 			}
 
-			unique[cup] = struct{}{}
+			unique[cup.Name] = struct{}{}
 		}
 
 		league = append(league, cup)
 	}
 
-	league = append(league, pkmn.CupStandard)
+	standardCup, _ := cup.FindCup(string(cup.StandardCup))
+	league = append(league, standardCup)
 
 	return league
 }
