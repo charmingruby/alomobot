@@ -16,7 +16,6 @@ type Cup struct {
 }
 
 var Cups = []Cup{
-	ashCup,
 	littleCup,
 	letterCup,
 	rentalCup,
@@ -28,7 +27,6 @@ var Cups = []Cup{
 	singleTypeCup,
 	standardCup,
 	starterCup,
-	chaosCup,
 }
 
 func (c Cup) String() string {
@@ -41,9 +39,9 @@ func (c Cup) Render() string {
 
 func (c Cup) Valid() bool {
 	switch c.Name {
-	case AshCup, LittleCup, LetterCup, RentalCup, MonogenCup, MonotypeCup,
+	case LittleCup, LetterCup, RentalCup, MonogenCup, MonotypeCup,
 		RandomPartyCup, BoosterCup, NoEvoCup, SingleTypeCup, StandardCup,
-		StarterCup, ChaosCup:
+		StarterCup:
 		return true
 	default:
 		return false

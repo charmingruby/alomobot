@@ -7,6 +7,6 @@ var monotypeCup = Cup{
 	Guide: GuideCup{
 		HowItWorks:   "All Pokémon on your team must share at least one type.",
 		Restrictions: "Dual-type Pokémon are allowed as long as they share the team's chosen type.",
-		TeamBuilding: "Choose a type and select Pokémon that have it. For example, Squirtle and Gyarados both share the Water type.",
+		TeamBuilding: "Use `/flip type` to draw your team's type, then select Pokémon that have it. For example, if Water is drawn, Squirtle and Gyarados are both allowed.",
 	},
 }

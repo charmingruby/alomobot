@@ -5,7 +5,7 @@ import (
 
 	"github.com/charmingruby/erebor/discord/api"
 
-	"github.com/charmingruby/alomobot/internal/cmd/message"
+	"github.com/charmingruby/alomobot/internal/cmd/template"
 	"github.com/charmingruby/alomobot/internal/core"
 )
 
@@ -20,7 +20,7 @@ func flipPokemon() api.Command {
 			}
 
 			return api.Response{
-				Content: message.Flip("Pokémon", poke.Render()),
+				Content: template.Flip("Pokémon", poke.Render()),
 				ImageURLs: []string{
 					poke.SpriteURL,
 				}}, nil

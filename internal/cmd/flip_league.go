@@ -6,7 +6,7 @@ import (
 
 	"github.com/charmingruby/erebor/discord/api"
 
-	"github.com/charmingruby/alomobot/internal/cmd/message"
+	"github.com/charmingruby/alomobot/internal/cmd/template"
 	"github.com/charmingruby/alomobot/internal/core"
 	"github.com/charmingruby/alomobot/internal/format"
 )
@@ -15,6 +15,8 @@ func flipLeague() api.Command {
 	const (
 		cupsParam       = "cups"
 		repeatableParam = "repeatable"
+		leaguePattern   = `**League**(%d)
+%s`
 	)
 
 	return api.Command{
@@ -42,9 +44,13 @@ func flipLeague() api.Command {
 
 			league := core.FlipLeague(ctx, filter)
 
-			content := fmt.Sprintf("**League**(%d)\n%s", len(league), format.List(league))
+			content := fmt.Sprintf(
+				leaguePattern,
+				len(league),
+				format.List(league),
+			)
 
-			return api.Response{Content: message.Flip("league", content)}, nil
+			return api.Response{Content: template.Flip("league", content)}, nil
 		},
 	}
 }

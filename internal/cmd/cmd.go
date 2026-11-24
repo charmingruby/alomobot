@@ -5,10 +5,11 @@ import "github.com/charmingruby/erebor/discord/api"
 func Commands() []api.Command {
 	return []api.Command{
 		{
-			Name:        "help",
-			Description: "Explains how the formats work",
+			Name:        "rules",
+			Description: "Explains tournament rules and formats",
 			Subcommands: []api.Command{
-				helpCup(),
+				rulesGlobal(),
+				rulesCup(),
 			},
 		},
 		{

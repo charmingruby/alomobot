@@ -6,13 +6,21 @@ import (
 
 	"github.com/charmingruby/erebor/discord/api"
 
-	"github.com/charmingruby/alomobot/internal/cmd/message"
+	"github.com/charmingruby/alomobot/internal/cmd/template"
 	"github.com/charmingruby/alomobot/internal/core"
 	"github.com/charmingruby/alomobot/internal/format"
 )
 
 func flipParty() api.Command {
-	const benchParam = "bench"
+	const (
+		benchParam   = "bench"
+		partyPattern = `**Party** (6/6)
+%s
+`
+		benchPattern = `
+**Bench** (%d)
+%s`
+	)
 
 	return api.Command{
 		Name:        "party",
@@ -35,7 +43,8 @@ func flipParty() api.Command {
 			}
 
 			partyDs := format.List(party)
-			content := fmt.Sprintf("**Party** (6/6)\n%s\n",
+			content := fmt.Sprintf(
+				partyPattern,
 				partyDs,
 			)
 
@@ -46,19 +55,20 @@ func flipParty() api.Command {
 
 			if len(bench) == 0 {
 				return api.Response{
-					Content:   message.Flip("party", content),
+					Content:   template.Flip("party", content),
 					ImageURLs: partyPokesURL,
 				}, nil
 			}
 
 			benchDs := format.List(bench)
-			content += fmt.Sprintf("\n**Bench** (%d)\n%s",
+			content += fmt.Sprintf(
+				benchPattern,
 				len(bench),
 				benchDs,
 			)
 
 			return api.Response{
-				Content:   message.Flip("party", content),
+				Content:   template.Flip("party", content),
 				ImageURLs: partyPokesURL,
 			}, nil
 		},

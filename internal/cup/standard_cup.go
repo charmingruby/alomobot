@@ -5,8 +5,8 @@ const StandardCup NameCup = "Standard"
 var standardCup = Cup{
 	Name: StandardCup,
 	Guide: GuideCup{
-		HowItWorks:   "[Explain how Standard Cup works.]",
-		Restrictions: "- [List allowed Pokémon and bans.]",
-		TeamBuilding: "1. [Describe the steps to build your team.]",
+		HowItWorks:   "Battles follow the general tournament rules, with no additional cup-specific restrictions.",
+		Restrictions: "All restrictions and bans from the general rules apply.",
+		TeamBuilding: "Build your team according to the general tournament rules.",
 	},
 }

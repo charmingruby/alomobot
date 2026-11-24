@@ -5,11 +5,11 @@ import (
 
 	"github.com/charmingruby/erebor/discord/api"
 
-	"github.com/charmingruby/alomobot/internal/cmd/message"
+	"github.com/charmingruby/alomobot/internal/cmd/template"
 	"github.com/charmingruby/alomobot/internal/cup"
 )
 
-func helpCup() api.Command {
+func rulesCup() api.Command {
 	const nameParam = "name"
 
 	choices := make([]api.Choice, 0, len(cup.Cups))
@@ -36,11 +36,11 @@ func helpCup() api.Command {
 			selected, ok := cup.FindCup(i.String(nameParam))
 			if !ok {
 				return api.Response{
-					Content: "Cup not found. Select one of the available cups in `/help cup`.",
+					Content: "Cup not found. Select one of the available cups in `/rules cup`.",
 				}, nil
 			}
 
-			return api.Response{Content: message.HelpCup(selected)}, nil
+			return api.Response{Content: template.RulesCup(selected)}, nil
 		},
 	}
 }
