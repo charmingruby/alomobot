@@ -6,11 +6,11 @@ import (
 
 	"github.com/charmingruby/erebor/discord/api"
 
-	"github.com/charmingruby/alomobot/internal/cup"
+	"github.com/charmingruby/alomobot/internal/core/cup"
 	"github.com/charmingruby/alomobot/internal/format"
 )
 
-func rulesGlobal() api.Command {
+func (c *cmd) rulesGlobal() api.Command {
 	return api.Command{
 		Name:        "global",
 		Description: "Shows the global rules that apply to all tournaments",

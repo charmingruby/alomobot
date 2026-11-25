@@ -6,12 +6,12 @@ import (
 
 	"github.com/charmingruby/erebor/discord/api"
 
+	"github.com/charmingruby/alomobot/internal/app"
 	"github.com/charmingruby/alomobot/internal/cmd/template"
-	"github.com/charmingruby/alomobot/internal/core"
 	"github.com/charmingruby/alomobot/internal/format"
 )
 
-func flipParty() api.Command {
+func (c *cmd) flipParty() api.Command {
 	const (
 		benchParam   = "bench"
 		partyPattern = `**Party** (6/6)
@@ -33,11 +33,11 @@ func flipParty() api.Command {
 			},
 		},
 		Handler: func(ctx context.Context, i api.Interaction) (api.Response, error) {
-			filter := core.FlipPartyFilter{
+			filter := app.FlipPartyFilter{
 				Bench: int(i.Integer(benchParam)),
 			}
 
-			party, bench, err := core.FlipParty(ctx, filter)
+			party, bench, err := c.app.FlipParty(ctx, filter)
 			if err != nil {
 				return api.Response{}, err
 			}

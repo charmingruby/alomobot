@@ -6,12 +6,12 @@ import (
 
 	"github.com/charmingruby/erebor/discord/api"
 
+	"github.com/charmingruby/alomobot/internal/app"
 	"github.com/charmingruby/alomobot/internal/cmd/template"
-	"github.com/charmingruby/alomobot/internal/core"
 	"github.com/charmingruby/alomobot/internal/format"
 )
 
-func flipLeague() api.Command {
+func (c *cmd) flipLeague() api.Command {
 	const (
 		cupsParam       = "cups"
 		repeatableParam = "repeatable"
@@ -35,14 +35,14 @@ func flipLeague() api.Command {
 			},
 		},
 		Handler: func(ctx context.Context, i api.Interaction) (api.Response, error) {
-			filter := core.FlipLeagueFilter{
+			filter := app.FlipLeagueFilter{
 				Cups:       int(i.Integer(cupsParam)),
 				Repeatable: i.Boolean(repeatableParam),
 			}
 
 			filter = filter.Normalize()
 
-			league := core.FlipLeague(ctx, filter)
+			league := c.app.FlipLeague(ctx, filter)
 
 			content := fmt.Sprintf(
 				leaguePattern,

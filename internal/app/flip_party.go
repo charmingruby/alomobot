@@ -1,10 +1,9 @@
-package core
+package app
 
 import (
 	"context"
 
-	"github.com/charmingruby/alomobot/internal/pkmn"
-	"github.com/charmingruby/alomobot/internal/pkmn/pokeapi"
+	"github.com/charmingruby/alomobot/internal/core/pkmn"
 )
 
 const partySize = 6
@@ -13,14 +12,13 @@ type FlipPartyFilter struct {
 	Bench int
 }
 
-func FlipParty(ctx context.Context, filter FlipPartyFilter) ([]pkmn.Pokemon, []pkmn.Pokemon, error) {
-	api := pokeapi.PokeAPIFromContext(ctx)
+func (a *App) FlipParty(ctx context.Context, filter FlipPartyFilter) ([]pkmn.Pokemon, []pkmn.Pokemon, error) {
 	party := make([]pkmn.Pokemon, 0, partySize)
 	bench := make([]pkmn.Pokemon, 0, max(0, filter.Bench))
 	unique := make(map[int]struct{}, partySize)
 
 	for len(party) < partySize || len(bench) < filter.Bench {
-		p, err := api.GetPokemonByDexID(ctx, pkmn.RandomNationalDexID())
+		p, err := a.api.GetPokemonByDexID(ctx, pkmn.RandomNationalDexID())
 		if err != nil {
 			return nil, nil, err
 		}

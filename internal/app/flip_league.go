@@ -1,9 +1,9 @@
-package core
+package app
 
 import (
 	"context"
 
-	"github.com/charmingruby/alomobot/internal/cup"
+	"github.com/charmingruby/alomobot/internal/core/cup"
 )
 
 const standardLeagueSize = 8
@@ -25,7 +25,7 @@ func (f FlipLeagueFilter) Normalize() FlipLeagueFilter {
 	return f
 }
 
-func FlipLeague(ctx context.Context, filter FlipLeagueFilter) []cup.Cup {
+func (a *App) FlipLeague(ctx context.Context, filter FlipLeagueFilter) []cup.Cup {
 	league := make([]cup.Cup, 0, filter.Cups)
 
 	var unique map[cup.NameCup]struct{}
@@ -34,7 +34,7 @@ func FlipLeague(ctx context.Context, filter FlipLeagueFilter) []cup.Cup {
 	}
 
 	for len(league) < filter.Cups-1 {
-		cup := FlipCup(ctx)
+		cup := a.FlipCup(ctx)
 
 		if !filter.Repeatable {
 			if _, ok := unique[cup.Name]; ok {

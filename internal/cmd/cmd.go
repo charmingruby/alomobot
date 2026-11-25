@@ -1,27 +1,38 @@
 package cmd
 
-import "github.com/charmingruby/erebor/discord/api"
+import (
+	"github.com/charmingruby/alomobot/internal/app"
+	"github.com/charmingruby/erebor/discord/api"
+)
 
-func Commands() []api.Command {
+type cmd struct {
+	app *app.App
+}
+
+func Commands(app *app.App) []api.Command {
+	c := cmd{
+		app: app,
+	}
+
 	return []api.Command{
 		{
 			Name:        "rules",
 			Description: "Explains tournament rules and formats",
 			Subcommands: []api.Command{
-				rulesGlobal(),
-				rulesCup(),
+				c.rulesGlobal(),
+				c.rulesCup(),
 			},
 		},
 		{
 			Name:        "flip",
 			Description: "Flips random Pokémon resources",
 			Subcommands: []api.Command{
-				flipType(),
-				flipCup(),
-				flipPokemon(),
-				flipParty(),
-				flipGen(),
-				flipLeague(),
+				c.flipType(),
+				c.flipCup(),
+				c.flipPokemon(),
+				c.flipParty(),
+				c.flipGen(),
+				c.flipLeague(),
 			},
 		},
 	}

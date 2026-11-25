@@ -3,7 +3,7 @@ package template
 import (
 	"fmt"
 
-	"github.com/charmingruby/alomobot/internal/cup"
+	"github.com/charmingruby/alomobot/internal/core/cup"
 )
 
 func RulesCup(c cup.Cup) string {

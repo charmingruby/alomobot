@@ -6,15 +6,14 @@ import (
 	"github.com/charmingruby/erebor/discord/api"
 
 	"github.com/charmingruby/alomobot/internal/cmd/template"
-	"github.com/charmingruby/alomobot/internal/core"
 )
 
-func flipCup() api.Command {
+func (c *cmd) flipCup() api.Command {
 	return api.Command{
 		Name:        "cup",
 		Description: "Flips a random cup",
 		Handler: func(ctx context.Context, _ api.Interaction) (api.Response, error) {
-			return api.Response{Content: template.Flip("cup", core.FlipCup(ctx).String())}, nil
+			return api.Response{Content: template.Flip("cup", c.app.FlipCup(ctx).String())}, nil
 		},
 	}
 }

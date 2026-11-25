@@ -6,15 +6,14 @@ import (
 	"github.com/charmingruby/erebor/discord/api"
 
 	"github.com/charmingruby/alomobot/internal/cmd/template"
-	"github.com/charmingruby/alomobot/internal/core"
 )
 
-func flipPokemon() api.Command {
+func (c *cmd) flipPokemon() api.Command {
 	return api.Command{
 		Name:        "pokemon",
 		Description: "Flips a random Pokémon",
 		Handler: func(ctx context.Context, _ api.Interaction) (api.Response, error) {
-			poke, err := core.FlipPokemon(ctx)
+			poke, err := c.app.FlipPokemon(ctx)
 			if err != nil {
 				return api.Response{}, err
 			}

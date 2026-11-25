@@ -6,10 +6,10 @@ import (
 	"github.com/charmingruby/erebor/discord/api"
 
 	"github.com/charmingruby/alomobot/internal/cmd/template"
-	"github.com/charmingruby/alomobot/internal/cup"
+	"github.com/charmingruby/alomobot/internal/core/cup"
 )
 
-func rulesCup() api.Command {
+func (c *cmd) rulesCup() api.Command {
 	const nameParam = "name"
 
 	choices := make([]api.Choice, 0, len(cup.Cups))
