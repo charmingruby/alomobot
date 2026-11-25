@@ -23,10 +23,9 @@ type SupportAttr struct{}
 type EnergyAttr struct{}
 
 type Card struct {
-	Name   string
-	Type   CardType
-	Rarity Rarity
-
+	Name        string
+	Type        CardType
+	Rarity      Rarity
 	PokemonAttr *PokemonAttr
 	SupportAttr *SupportAttr
 	EnergyAttr  *EnergyAttr

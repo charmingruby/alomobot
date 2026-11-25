@@ -17,3 +17,35 @@ var rarities = []Rarity{
 	EpicRarity,
 	LegendaryRarity,
 }
+
+func (r Rarity) Emoji() string {
+	switch r {
+	case CommonRarity:
+		return "⬜️"
+	case UncommonRarity:
+		return "🟩"
+	case RareRarity:
+		return "🟦"
+	case EpicRarity:
+		return "🟪"
+	case LegendaryRarity:
+		return "🟨"
+	default:
+		return "⬛️"
+	}
+	//
+	// switch r {
+	// case CommonRarity:
+	// 	return "⚪️"
+	// case UncommonRarity:
+	// 	return "🟢"
+	// case RareRarity:
+	// 	return "🔵"
+	// case EpicRarity:
+	// 	return "🟣"
+	// case LegendaryRarity:
+	// 	return "🟠"
+	// default:
+	// 	return "⚫️"
+	// }
+}

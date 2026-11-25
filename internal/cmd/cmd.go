@@ -16,6 +16,13 @@ func Commands(app *app.App) []api.Command {
 
 	return []api.Command{
 		{
+			Name:        "booster",
+			Description: "Opens Pokémon boosters",
+			Subcommands: []api.Command{
+				c.boosterOpen(),
+			},
+		},
+		{
 			Name:        "rules",
 			Description: "Explains tournament rules and formats",
 			Subcommands: []api.Command{

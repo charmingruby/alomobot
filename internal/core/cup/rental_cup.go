@@ -1,6 +1,6 @@
 package cup
 
-const RentalCup NameCup = "Rental"
+const RentalCup CupName = "Rental"
 
 var rentalCup = Cup{
 	Name: RentalCup,

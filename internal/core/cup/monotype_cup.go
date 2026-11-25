@@ -1,6 +1,6 @@
 package cup
 
-const MonotypeCup NameCup = "Monotype"
+const MonotypeCup CupName = "Monotype"
 
 var monotypeCup = Cup{
 	Name: MonotypeCup,

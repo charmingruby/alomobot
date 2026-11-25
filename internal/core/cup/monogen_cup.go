@@ -1,6 +1,6 @@
 package cup
 
-const MonogenCup NameCup = "Monogen"
+const MonogenCup CupName = "Monogen"
 
 var monogenCup = Cup{
 	Name: MonogenCup,

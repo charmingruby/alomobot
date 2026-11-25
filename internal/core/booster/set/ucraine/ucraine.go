@@ -7,6 +7,8 @@ import (
 	"github.com/charmingruby/alomobot/internal/core/booster/set/ucraine/pokemon"
 )
 
+const Name booster.SetName = "Ucrânia"
+
 type Ucraine struct {
 	booster.Set
 }
@@ -14,6 +16,7 @@ type Ucraine struct {
 func New() *Ucraine {
 	return &Ucraine{
 		Set: booster.Set{
+			Name:         Name,
 			PokemonCards: slices.Concat(pokemon.Common, pokemon.Uncommon, pokemon.Rare, pokemon.Epic, pokemon.Legendary),
 			Slots: []booster.Slot{
 				{

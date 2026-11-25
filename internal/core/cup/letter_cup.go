@@ -1,6 +1,6 @@
 package cup
 
-const LetterCup NameCup = "Letter"
+const LetterCup CupName = "Letter"
 
 var letterCup = Cup{
 	Name: LetterCup,

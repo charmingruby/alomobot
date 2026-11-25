@@ -1,6 +1,7 @@
 package booster
 
 import (
+	"cmp"
 	"context"
 	"fmt"
 	"math/rand/v2"
@@ -12,12 +13,19 @@ type Slot struct {
 	MinRarity Rarity
 }
 
+type SetName string
+
 type Set struct {
+	Name          SetName
 	PokemonCards  []Card
 	SupportCards  []Card
 	EnergyCards   []Card
 	Slots         []Slot
 	RarityWeights map[Rarity]int
+}
+
+func (s Set) String() string {
+	return string(s.Name)
 }
 
 func (s *Set) Open(ctx context.Context) ([]Card, error) {
@@ -82,6 +90,10 @@ func (s *Set) Open(ctx context.Context) ([]Card, error) {
 			break
 		}
 	}
+
+	slices.SortStableFunc(cards, func(a, b Card) int {
+		return cmp.Compare(slices.Index(rarities, a.Rarity), slices.Index(rarities, b.Rarity))
+	})
 
 	return cards, nil
 }

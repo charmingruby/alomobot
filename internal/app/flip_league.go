@@ -28,9 +28,9 @@ func (f FlipLeagueFilter) Normalize() FlipLeagueFilter {
 func (a *App) FlipLeague(ctx context.Context, filter FlipLeagueFilter) []cup.Cup {
 	league := make([]cup.Cup, 0, filter.Cups)
 
-	var unique map[cup.NameCup]struct{}
+	var unique map[cup.CupName]struct{}
 	if !filter.Repeatable {
-		unique = make(map[cup.NameCup]struct{}, filter.Cups)
+		unique = make(map[cup.CupName]struct{}, filter.Cups)
 	}
 
 	for len(league) < filter.Cups-1 {

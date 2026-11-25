@@ -2,11 +2,14 @@ package app
 
 import (
 	"context"
-	"math/rand"
+	"maps"
+	"math/rand/v2"
+	"slices"
 
 	"github.com/charmingruby/alomobot/internal/core/cup"
 )
 
 func (a *App) FlipCup(_ context.Context) cup.Cup {
-	return cup.Cups[rand.Intn(len(cup.Cups))]
+	cups := slices.Collect(maps.Values(cup.Cups))
+	return cups[rand.IntN(len(cups))]
 }

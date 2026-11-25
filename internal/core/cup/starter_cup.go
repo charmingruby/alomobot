@@ -1,6 +1,6 @@
 package cup
 
-const StarterCup NameCup = "Starter"
+const StarterCup CupName = "Starter"
 
 var starterCup = Cup{
 	Name: StarterCup,

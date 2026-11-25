@@ -2,9 +2,11 @@ package cmd
 
 import (
 	"context"
+	"errors"
 
 	"github.com/charmingruby/erebor/discord/api"
 
+	"github.com/charmingruby/alomobot/internal/app"
 	"github.com/charmingruby/alomobot/internal/cmd/template"
 	"github.com/charmingruby/alomobot/internal/core/cup"
 )
@@ -13,10 +15,10 @@ func (c *cmd) rulesCup() api.Command {
 	const nameParam = "name"
 
 	choices := make([]api.Choice, 0, len(cup.Cups))
-	for _, cup := range cup.Cups {
+	for name := range cup.Cups {
 		choices = append(choices, api.Choice{
-			Name:  cup.String(),
-			Value: cup.String(),
+			Name:  string(name),
+			Value: string(name),
 		})
 	}
 
@@ -32,12 +34,16 @@ func (c *cmd) rulesCup() api.Command {
 				Choices:     choices,
 			},
 		},
-		Handler: func(_ context.Context, i api.Interaction) (api.Response, error) {
-			selected, ok := cup.FindCup(i.String(nameParam))
-			if !ok {
+		Handler: func(ctx context.Context, i api.Interaction) (api.Response, error) {
+			selected, err := c.app.RulesCup(ctx, i.String(nameParam))
+			if errors.Is(err, app.ErrCupNotFound) {
 				return api.Response{
 					Content: "Cup not found. Select one of the available cups in `/rules cup`.",
 				}, nil
+			}
+
+			if err != nil {
+				return api.Response{}, err
 			}
 
 			return api.Response{Content: template.RulesCup(selected)}, nil
