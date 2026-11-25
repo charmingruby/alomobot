@@ -1,7 +1,6 @@
 package ucraine
 
 import (
-	"context"
 	"slices"
 
 	"github.com/charmingruby/alomobot/internal/core/booster"
@@ -9,12 +8,12 @@ import (
 )
 
 type Ucraine struct {
-	booster.SetDefinition
+	booster.Set
 }
 
 func New() *Ucraine {
 	return &Ucraine{
-		SetDefinition: booster.SetDefinition{
+		Set: booster.Set{
 			PokemonCards: slices.Concat(pokemon.Common, pokemon.Uncommon, pokemon.Rare, pokemon.Epic, pokemon.Legendary),
 			Slots: []booster.Slot{
 				{
@@ -38,20 +37,12 @@ func New() *Ucraine {
 				// },
 			},
 			RarityWeights: map[booster.Rarity]int{
-				booster.CommonRarity:    30,
+				booster.CommonRarity:    35,
 				booster.UncommonRarity:  25,
 				booster.RareRarity:      20,
 				booster.EpicRarity:      15,
-				booster.LegendaryRarity: 10,
+				booster.LegendaryRarity: 5,
 			},
 		},
 	}
-}
-
-func (s *Ucraine) Open(ctx context.Context) ([]booster.Card, error) {
-	for _, c := range s.PokemonCards {
-
-	}
-
-	return nil, nil
 }
