@@ -5,28 +5,38 @@ import "context"
 type CardType string
 
 const (
-	CardTypeEnergy  CardType = "energy"
-	CardTypePokemon CardType = "pokemon"
-	CardTypeTrainer CardType = "trainer"
+	EnergyCardType  CardType = "energy"
+	PokemonCardType CardType = "pokemon"
+	TrainerCardType CardType = "trainer"
 )
 
-type CardRarity string
+type Rarity string
 
 const (
-	CardRarityCommon    CardRarity = "common"
-	CardRarityRare      CardRarity = "rare"
-	CardRarityEpic      CardRarity = "epic"
-	CardRarityLegendary CardRarity = "legendary"
+	CommonRarity    Rarity = "common"
+	RareRarity      Rarity = "rare"
+	EpicRarity      Rarity = "epic"
+	LegendaryRarity Rarity = "legendary"
 )
 
 type Card struct {
 	Name        string
 	Description string
-	Set         *string
+	Set         string
 	Type        CardType
-	Rarity      CardRarity
+	Rarity      Rarity
 }
 
-type BoosterPack interface {
-	Open(context.Context) []Card
+type Slot struct {
+	Types []CardType
+}
+
+type SetDefinition struct {
+	Cards         []Card
+	Slots         []Slot
+	RarityWeights map[Rarity]int
+}
+
+type Set interface {
+	Open(ctx context.Context, packs int) ([]Card, error)
 }
