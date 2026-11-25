@@ -21,31 +21,16 @@ var rarities = []Rarity{
 func (r Rarity) Emoji() string {
 	switch r {
 	case CommonRarity:
-		return "⬜️"
+		return "⚪️"
 	case UncommonRarity:
-		return "🟩"
+		return "🟢"
 	case RareRarity:
-		return "🟦"
+		return "🔵"
 	case EpicRarity:
-		return "🟪"
+		return "🟣"
 	case LegendaryRarity:
-		return "🟨"
+		return "🟠"
 	default:
-		return "⬛️"
+		return "⚫️"
 	}
-	//
-	// switch r {
-	// case CommonRarity:
-	// 	return "⚪️"
-	// case UncommonRarity:
-	// 	return "🟢"
-	// case RareRarity:
-	// 	return "🔵"
-	// case EpicRarity:
-	// 	return "🟣"
-	// case LegendaryRarity:
-	// 	return "🟠"
-	// default:
-	// 	return "⚫️"
-	// }
 }

@@ -26,5 +26,19 @@ func (a *App) OpenBooster(ctx context.Context, name string) (OpenBoosterResult, 
 		return OpenBoosterResult{}, err
 	}
 
-	return OpenBoosterResult{Set: selected, Cards: cards}, nil
+	for _, card := range cards {
+		if card.Type == booster.PokemonCardType {
+			pokemon, err := a.api.GetPokemonByDexID(ctx, card.PokemonAttr.ID)
+			if err != nil {
+				return OpenBoosterResult{}, err
+			}
+
+			card.PokemonAttr.Pokemon = pokemon
+		}
+	}
+
+	return OpenBoosterResult{
+		Set:   selected,
+		Cards: cards,
+	}, nil
 }

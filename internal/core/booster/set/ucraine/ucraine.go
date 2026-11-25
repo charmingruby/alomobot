@@ -29,6 +29,9 @@ func New() *Ucraine {
 					Types: []booster.CardType{booster.PokemonCardType},
 				},
 				{
+					Types: []booster.CardType{booster.PokemonCardType},
+				},
+				{
 					Types:     []booster.CardType{booster.PokemonCardType},
 					MinRarity: booster.RareRarity,
 				},

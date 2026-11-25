@@ -3,16 +3,21 @@ package cmd
 import (
 	"context"
 	"errors"
+	"fmt"
 
 	"github.com/charmingruby/erebor/discord/api"
 
 	"github.com/charmingruby/alomobot/internal/app"
-	"github.com/charmingruby/alomobot/internal/cmd/template"
+	"github.com/charmingruby/alomobot/internal/core/booster"
 	"github.com/charmingruby/alomobot/internal/core/booster/set"
+	"github.com/charmingruby/alomobot/internal/format"
 )
 
 func (c *cmd) boosterOpen() api.Command {
-	const setParam = "set"
+	const (
+		setParam = "set"
+		pattern  = "📦 Opened a booster from **%s** set!\n\n**Cards** (%d)\n%s"
+	)
 
 	choices := make([]api.Choice, 0, len(set.Sets))
 	for name := range set.Sets {
@@ -45,7 +50,17 @@ func (c *cmd) boosterOpen() api.Command {
 				return api.Response{}, err
 			}
 
-			return api.Response{Content: template.OpenBooster(result.Set, result.Cards)}, nil
+			sprites := make([]string, 0, len(result.Cards))
+			for _, card := range result.Cards {
+				if card.Type == booster.PokemonCardType {
+					sprites = append(sprites, card.PokemonAttr.SpriteURL)
+				}
+			}
+
+			return api.Response{
+				Content:   fmt.Sprintf(pattern, result.Set.Name, len(result.Cards), format.List(result.Cards)),
+				ImageURLs: sprites,
+			}, nil
 		},
 	}
 }

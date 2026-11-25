@@ -76,9 +76,10 @@ func (s *Set) Open(ctx context.Context) ([]Card, error) {
 
 			switch card.Type {
 			case PokemonCardType:
-				card.PokemonAttr = &PokemonAttr{
-					ID:    card.PokemonAttr.ID,
-					Types: slices.Clone(card.PokemonAttr.Types),
+				card.PokemonAttr = new(*card.PokemonAttr)
+
+				if card.PokemonAttr.SecondaryType != nil {
+					card.PokemonAttr.SecondaryType = new(*card.PokemonAttr.SecondaryType)
 				}
 			case SupportCardType:
 				card.SupportAttr = new(*card.SupportAttr)
