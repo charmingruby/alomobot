@@ -2,8 +2,10 @@ package ucraine
 
 import (
 	"context"
+	"slices"
 
 	"github.com/charmingruby/alomobot/internal/core/booster"
+	"github.com/charmingruby/alomobot/internal/core/booster/set/ucraine/pokemon"
 )
 
 type Ucraine struct {
@@ -13,7 +15,7 @@ type Ucraine struct {
 func New() *Ucraine {
 	return &Ucraine{
 		SetDefinition: booster.SetDefinition{
-			Cards: []booster.Card{},
+			PokemonCards: slices.Concat(pokemon.Common, pokemon.Uncommon, pokemon.Rare, pokemon.Epic, pokemon.Legendary),
 			Slots: []booster.Slot{
 				{
 					Types: []booster.CardType{booster.PokemonCardType},
@@ -28,12 +30,12 @@ func New() *Ucraine {
 					Types:     []booster.CardType{booster.PokemonCardType},
 					MinRarity: booster.RareRarity,
 				},
-				{
-					Types: []booster.CardType{booster.EnergyCardType, booster.SupportCardType},
-				},
-				{
-					Types: []booster.CardType{booster.EnergyCardType, booster.SupportCardType},
-				},
+				// {
+				// 	Types: []booster.CardType{booster.EnergyCardType, booster.SupportCardType},
+				// },
+				// {
+				// 	Types: []booster.CardType{booster.EnergyCardType, booster.SupportCardType},
+				// },
 			},
 			RarityWeights: map[booster.Rarity]int{
 				booster.CommonRarity:    30,
@@ -46,6 +48,10 @@ func New() *Ucraine {
 	}
 }
 
-func (s *Ucraine) Open(ctx context.Context, packs int) ([]booster.Card, error) {
+func (s *Ucraine) Open(ctx context.Context) ([]booster.Card, error) {
+	for _, c := range s.PokemonCards {
+
+	}
+
 	return nil, nil
 }

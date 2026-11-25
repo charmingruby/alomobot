@@ -3,6 +3,7 @@ package booster
 import (
 	"context"
 
+	"github.com/charmingruby/alomobot/internal/core/booster/deck"
 	"github.com/charmingruby/alomobot/internal/core/pkmn"
 )
 
@@ -25,6 +26,7 @@ const (
 )
 
 type PokemonAttr struct {
+	ID    int
 	Types []pkmn.Type
 }
 
@@ -34,7 +36,6 @@ type EnergyAttr struct{}
 
 type Card struct {
 	Name   string
-	Set    string
 	Type   CardType
 	Rarity Rarity
 
@@ -49,11 +50,25 @@ type Slot struct {
 }
 
 type SetDefinition struct {
-	Cards         []Card
+	PokemonCards  []Card
+	SupportCards  []Card
+	EnergyCards   []Card
 	Slots         []Slot
 	RarityWeights map[Rarity]int
 }
 
 type Set interface {
-	Open(ctx context.Context, packs int) ([]Card, error)
+	Open(ctx context.Context) ([]Card, error)
+}
+
+func NewPokemonCard(def deck.Pokemon, rarity Rarity) Card {
+	return Card{
+		Name:   def.Name,
+		Type:   PokemonCardType,
+		Rarity: rarity,
+		PokemonAttr: &PokemonAttr{
+			ID:    def.ID,
+			Types: def.Types,
+		},
+	}
 }
