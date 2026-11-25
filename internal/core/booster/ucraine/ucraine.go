@@ -3,7 +3,7 @@ package ucraine
 import (
 	"context"
 
-	"github.com/charmingruby/alomobot/internal/booster"
+	"github.com/charmingruby/alomobot/internal/core/booster"
 )
 
 type Ucraine struct {
