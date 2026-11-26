@@ -17,9 +17,18 @@ func Commands(app *app.App) []api.Command {
 	return []api.Command{
 		{
 			Name:        "booster",
-			Description: "Opens Pokémon boosters",
+			Description: "Opens boosters and searches set cards",
 			Subcommands: []api.Command{
-				c.boosterOpen(),
+				c.openBooster(),
+				{
+					Name:        "search",
+					Description: "Searches cards by set, name, rarity and type",
+					Subcommands: []api.Command{
+						c.searchPokemonCards(),
+						c.searchSupportCards(),
+						c.searchEnergyCards(),
+					},
+				},
 			},
 		},
 		{
@@ -31,14 +40,44 @@ func Commands(app *app.App) []api.Command {
 			},
 		},
 		{
-			Name:        "flip",
-			Description: "Flips random Pokémon resources",
+			Name:        "pokemon",
+			Description: "Pokémon commands",
+			Subcommands: []api.Command{
+				c.flipPokemon(),
+			},
+		},
+		{
+			Name:        "type",
+			Description: "Pokémon type commands",
 			Subcommands: []api.Command{
 				c.flipType(),
+			},
+		},
+		{
+			Name:        "cup",
+			Description: "Tournament cup commands",
+			Subcommands: []api.Command{
 				c.flipCup(),
-				c.flipPokemon(),
+			},
+		},
+		{
+			Name:        "party",
+			Description: "Pokémon party commands",
+			Subcommands: []api.Command{
 				c.flipParty(),
+			},
+		},
+		{
+			Name:        "gen",
+			Description: "Pokémon generation commands",
+			Subcommands: []api.Command{
 				c.flipGen(),
+			},
+		},
+		{
+			Name:        "league",
+			Description: "Tournament league commands",
+			Subcommands: []api.Command{
 				c.flipLeague(),
 			},
 		},

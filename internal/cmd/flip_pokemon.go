@@ -10,7 +10,7 @@ import (
 
 func (c *cmd) flipPokemon() api.Command {
 	return api.Command{
-		Name:        "pokemon",
+		Name:        "flip",
 		Description: "Flips a random Pokémon",
 		Handler: func(ctx context.Context, _ api.Interaction) (api.Response, error) {
 			poke, err := c.app.FlipPokemon(ctx)

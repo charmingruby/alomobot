@@ -13,10 +13,10 @@ import (
 	"github.com/charmingruby/alomobot/internal/format"
 )
 
-func (c *cmd) boosterOpen() api.Command {
+func (c *cmd) openBooster() api.Command {
 	const (
-		setParam = "set"
-		pattern  = "📦 Opened a booster from **%s** set!"
+		setParam       = "set"
+		headingPattern = "📦 Opened a booster from **%s** set!"
 	)
 
 	choices := make([]api.Choice, 0, len(set.Sets))
@@ -64,7 +64,7 @@ func (c *cmd) boosterOpen() api.Command {
 				}
 			}
 
-			content := fmt.Sprintf(pattern, result.Set.Name)
+			content := fmt.Sprintf(headingPattern, result.Set.Name)
 
 			if len(pokemonCards) > 0 {
 				content += fmt.Sprintf("\n\n**Pokémon** (%d)\n%s", len(pokemonCards), format.List(pokemonCards))
