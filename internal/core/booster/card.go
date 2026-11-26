@@ -14,19 +14,29 @@ const (
 	SupportCardType CardType = "support"
 )
 
+type SupportMechanic string
+
+const (
+	CaptureMechanic        SupportMechanic = "capture"
+	RenewalRiskMechanic    SupportMechanic = "renewal_risk"
+	TypeSpecialistMechanic SupportMechanic = "type_specialist"
+	SynergyMechanic        SupportMechanic = "synergy"
+)
+
+type SupportAttr struct {
+	Mechanic  SupportMechanic
+	Effect    string
+	Condition string
+}
+
 type PokemonAttr struct {
 	pkmn.Pokemon
 }
 
-type SupportAttr struct {
-	Name        string
-	Description string
-}
-
 type EnergyAttr struct {
-	Name        string
-	Type        pkmn.Type
-	Description string
+	Type      pkmn.Type
+	Effect    string
+	Condition string
 }
 
 type Card struct {
@@ -55,9 +65,15 @@ func (c Card) Render() string {
 			content += fmt.Sprintf(" / %s", c.PokemonAttr.SecondaryType.Render())
 		}
 	case SupportCardType:
-		content += fmt.Sprintf(": _%s_", c.SupportAttr.Description)
+		content += fmt.Sprintf(": _%s_", c.SupportAttr.Effect)
+		if c.SupportAttr.Condition != "" {
+			content += fmt.Sprintf("\nCondition: %s", c.SupportAttr.Condition)
+		}
 	case EnergyCardType:
-		content += fmt.Sprintf(": _%s_", c.EnergyAttr.Description)
+		content += fmt.Sprintf(": _%s_", c.EnergyAttr.Effect)
+		if c.EnergyAttr.Condition != "" {
+			content += fmt.Sprintf("\nCondition: %s", c.EnergyAttr.Condition)
+		}
 	}
 
 	return content
@@ -82,24 +98,24 @@ func NewPokemonCard(id int, name string, types ...pkmn.Type) Card {
 	}
 }
 
-func NewSupportCard(name, description string) Card {
+func NewSupportCard(name, effect, condition string, mechanic SupportMechanic) Card {
 	return Card{
 		Name: name,
 		Type: SupportCardType,
 		SupportAttr: &SupportAttr{
-			Name:        name,
-			Description: description,
+			Effect:    effect,
+			Condition: condition,
+			Mechanic:  mechanic,
 		},
 	}
 }
 
-func NewEnergyCard(name, description string) Card {
+func NewEnergyCard(name, effect string) Card {
 	return Card{
 		Name: name,
 		Type: EnergyCardType,
 		EnergyAttr: &EnergyAttr{
-			Name:        name,
-			Description: description,
+			Effect: effect,
 		},
 	}
 }

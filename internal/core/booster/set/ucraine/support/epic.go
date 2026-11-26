@@ -6,5 +6,9 @@ import (
 )
 
 var Epic = []booster.Card{
-	deck.Fisherman.WithRarity(booster.EpicRarity),
+	deck.LureBall.WithRarity(booster.EpicRarity),
+	deck.TimerBall.WithRarity(booster.EpicRarity),
+	deck.LuxuryBall.WithRarity(booster.EpicRarity),
+	deck.ProfessorSycamore.WithRarity(booster.EpicRarity),
+	deck.PokemonBreeder.WithRarity(booster.EpicRarity),
 }

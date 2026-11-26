@@ -20,7 +20,7 @@ func New() *Ucraine {
 		Set: booster.Set{
 			Name:         Name,
 			PokemonCards: slices.Concat(pokemon.Common, pokemon.Uncommon, pokemon.Rare, pokemon.Epic, pokemon.Legendary),
-			SupportCards: support.Epic,
+			SupportCards: slices.Concat(support.Common, support.Uncommon, support.Rare, support.Epic, support.Legendary),
 			EnergyCards:  slices.Concat(energy.Common, energy.Epic),
 			Slots: []booster.Slot{
 				{
