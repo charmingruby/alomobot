@@ -4,7 +4,9 @@ import (
 	"slices"
 
 	"github.com/charmingruby/alomobot/internal/core/booster"
+	"github.com/charmingruby/alomobot/internal/core/booster/set/ucraine/energy"
 	"github.com/charmingruby/alomobot/internal/core/booster/set/ucraine/pokemon"
+	"github.com/charmingruby/alomobot/internal/core/booster/set/ucraine/support"
 )
 
 const Name booster.SetName = "Ucrânia"
@@ -18,6 +20,8 @@ func New() *Ucraine {
 		Set: booster.Set{
 			Name:         Name,
 			PokemonCards: slices.Concat(pokemon.Common, pokemon.Uncommon, pokemon.Rare, pokemon.Epic, pokemon.Legendary),
+			SupportCards: support.Epic,
+			EnergyCards:  slices.Concat(energy.Common, energy.Epic),
 			Slots: []booster.Slot{
 				{
 					Types: []booster.CardType{booster.PokemonCardType},
@@ -35,12 +39,12 @@ func New() *Ucraine {
 					Types:     []booster.CardType{booster.PokemonCardType},
 					MinRarity: booster.RareRarity,
 				},
-				// {
-				// 	Types: []booster.CardType{booster.EnergyCardType, booster.SupportCardType},
-				// },
-				// {
-				// 	Types: []booster.CardType{booster.EnergyCardType, booster.SupportCardType},
-				// },
+				{
+					Types: []booster.CardType{booster.EnergyCardType, booster.SupportCardType},
+				},
+				{
+					Types: []booster.CardType{booster.EnergyCardType, booster.SupportCardType},
+				},
 			},
 			RarityWeights: map[booster.Rarity]int{
 				booster.CommonRarity:    35,

@@ -1,21 +1,12 @@
 package deck
 
 import (
+	"github.com/charmingruby/alomobot/internal/core/booster"
 	"github.com/charmingruby/alomobot/internal/core/pkmn"
 )
 
-type Pokemon struct {
-	Name  string
-	ID    int
-	Types []pkmn.Type
-}
-
-func pokemon(name string, id int, types ...pkmn.Type) Pokemon {
-	return Pokemon{
-		Name:  name,
-		ID:    id,
-		Types: types,
-	}
+func pokemon(name string, id int, types ...pkmn.Type) booster.Card {
+	return booster.NewPokemonCard(id, name, types...)
 }
 
 var (

@@ -16,7 +16,7 @@ import (
 func (c *cmd) boosterOpen() api.Command {
 	const (
 		setParam = "set"
-		pattern  = "📦 Opened a booster from **%s** set!\n\n**Cards** (%d)\n%s"
+		pattern  = "📦 Opened a booster from **%s** set!"
 	)
 
 	choices := make([]api.Choice, 0, len(set.Sets))
@@ -51,14 +51,35 @@ func (c *cmd) boosterOpen() api.Command {
 			}
 
 			sprites := make([]string, 0, len(result.Cards))
+			var pokemonCards, supportCards, energyCards []booster.Card
 			for _, card := range result.Cards {
-				if card.Type == booster.PokemonCardType {
+				switch card.Type {
+				case booster.PokemonCardType:
+					pokemonCards = append(pokemonCards, card)
 					sprites = append(sprites, card.PokemonAttr.SpriteURL)
+				case booster.SupportCardType:
+					supportCards = append(supportCards, card)
+				case booster.EnergyCardType:
+					energyCards = append(energyCards, card)
 				}
 			}
 
+			content := fmt.Sprintf(pattern, result.Set.Name)
+
+			if len(pokemonCards) > 0 {
+				content += fmt.Sprintf("\n\n**Pokémon** (%d)\n%s", len(pokemonCards), format.List(pokemonCards))
+			}
+
+			if len(supportCards) > 0 {
+				content += fmt.Sprintf("\n\n**Support** (%d)\n%s", len(supportCards), format.List(supportCards))
+			}
+
+			if len(energyCards) > 0 {
+				content += fmt.Sprintf("\n\n**Energy** (%d)\n%s", len(energyCards), format.List(energyCards))
+			}
+
 			return api.Response{
-				Content:   fmt.Sprintf(pattern, result.Set.Name, len(result.Cards), format.List(result.Cards)),
+				Content:   content,
 				ImageURLs: sprites,
 			}, nil
 		},
