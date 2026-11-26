@@ -4,10 +4,12 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"strings"
 
 	"github.com/charmingruby/erebor/discord/api"
 
 	"github.com/charmingruby/alomobot/internal/app"
+	"github.com/charmingruby/alomobot/internal/cmd/template"
 	"github.com/charmingruby/alomobot/internal/core/booster"
 	"github.com/charmingruby/alomobot/internal/core/booster/set"
 	"github.com/charmingruby/alomobot/internal/core/pkmn"
@@ -94,9 +96,18 @@ func (c *cmd) searchPokemonCards() api.Command {
 				return response, nil
 			}
 
+			parameters := []string{fmt.Sprintf("Set `%s`", result.Set)}
+
+			if rarity := i.String("rarity"); rarity != "" {
+				parameters = append(parameters, fmt.Sprintf("Rarity `%s`", rarity))
+			}
+
+			if kind := i.String("type"); kind != "" {
+				parameters = append(parameters, fmt.Sprintf("Type `%s`", kind))
+			}
+
 			return api.Response{
-				Content: fmt.Sprintf("🃏 **%s** — Pokémon (%d)\n\n%s\n\nPage %d/%d",
-					result.Set, result.Total, format.List(result.Cards), result.Page, result.Pages),
+				Content: template.SearchCards(strings.Join(parameters, " • "), result.Cards, result.Total, result.Page, result.Pages),
 			}, nil
 		},
 	}
