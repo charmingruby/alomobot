@@ -85,20 +85,11 @@ func (c *cmd) searchPokemonCards() api.Command {
 				return api.Response{Content: fmt.Sprintf("No Pokémon cards found for these filters in **%s**.", result.Set)}, nil
 			}
 
-			if result.Detailed {
-				card := result.Cards[0]
-				response := api.Response{
-					Content: fmt.Sprintf("🃏 **%s** — Pokémon\n\n%s", result.Set, card.Render()),
-				}
-
-				if card.Type == booster.PokemonCardType {
-					response.ImageURLs = []string{card.PokemonAttr.SpriteURL}
-				}
-
-				return response, nil
-			}
-
 			parameters := []string{fmt.Sprintf("Set `%s`", result.Set)}
+
+			if name := i.String("name"); name != "" {
+				parameters = append(parameters, fmt.Sprintf("Name `%s`", name))
+			}
 
 			if rarity := i.String("rarity"); rarity != "" {
 				parameters = append(parameters, fmt.Sprintf("Rarity `%s`", rarity))
@@ -106,6 +97,19 @@ func (c *cmd) searchPokemonCards() api.Command {
 
 			if kind := i.String("type"); kind != "" {
 				parameters = append(parameters, fmt.Sprintf("Type `%s`", kind))
+			}
+
+			if result.Detailed {
+				card := result.Cards[0]
+				response := api.Response{
+					Content: fmt.Sprintf("🔎 **Search results**\n\n**Parameters:** %s\n\n**Cards (1)**\n%s", strings.Join(parameters, " • "), card.Render()),
+				}
+
+				if card.Type == booster.PokemonCardType {
+					response.ImageURLs = []string{card.PokemonAttr.SpriteURL}
+				}
+
+				return response, nil
 			}
 
 			return api.Response{
