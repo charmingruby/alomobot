@@ -32,7 +32,7 @@ type SearchSupportCardsResult struct {
 }
 
 func (a *App) SearchSupportCards(ctx context.Context, filter SearchSupportCardsFilter) (SearchSupportCardsResult, error) {
-	const pageSize = 25
+	const pageSize = 10
 
 	if err := ctx.Err(); err != nil {
 		return SearchSupportCardsResult{}, err

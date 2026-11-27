@@ -41,6 +41,14 @@ type DrawFilter struct {
 	Types     []pkmn.Type
 }
 
+func (f DrawFilter) Normalize() DrawFilter {
+	if f.Quantity == 0 {
+		f.Quantity = 1
+	}
+
+	return f
+}
+
 func (f DrawFilter) Validate() error {
 	if f.Quantity < 1 {
 		return ErrInvalidDrawFilter
@@ -121,6 +129,7 @@ func (s Set) Draw(ctx context.Context, filter DrawFilter) ([]Card, error) {
 		return nil, err
 	}
 
+	filter = filter.Normalize()
 	if err := filter.Validate(); err != nil {
 		return nil, err
 	}

@@ -47,7 +47,7 @@ func (c *cmd) searchSupportCards() api.Command {
 			},
 			{
 				Type: api.ParameterInteger, Name: "page",
-				Description: "Page number (25 cards per page); ignored when reading a named card", MinValue: new(1.0),
+				Description: "Page number (10 cards per page); ignored when reading a named card", MinValue: new(1.0),
 			},
 		},
 		Handler: func(ctx context.Context, i api.Interaction) (api.Response, error) {

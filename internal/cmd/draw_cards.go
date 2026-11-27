@@ -22,8 +22,7 @@ func (c *cmd) drawCards() api.Command {
 		minRarityParam = "min_rarity"
 		maxRarityParam = "max_rarity"
 		typesParam     = "types"
-		headingPattern = "🃏 Revealed **%d Pokémon**"
-		cardsPattern   = "\n%s\n\n%s\n\nChoose and discard manually according to the Trainer's effect."
+		pattern        = "🃏 Your Pokémon have been revealed!\n\n%s\n\n**Cards** (%d)\n%s"
 	)
 
 	setChoices := make([]api.Choice, 0, len(set.Sets))
@@ -56,8 +55,7 @@ func (c *cmd) drawCards() api.Command {
 			{
 				Type:        api.ParameterInteger,
 				Name:        quantityParam,
-				Description: "Number of distinct Pokémon to reveal (1-10)",
-				Required:    true,
+				Description: "Number of distinct Pokémon to reveal (1-10); defaults to 1",
 				MinValue:    new(1.0),
 				MaxValue:    float64(booster.MaxDrawQuantity),
 			},
@@ -111,18 +109,18 @@ func (c *cmd) drawCards() api.Command {
 				return api.Response{}, err
 			}
 
-			parameters := []string{fmt.Sprintf("Set `%s`", result.Set)}
+			parameters := []string{fmt.Sprintf("**Set** `%s`", result.Set)}
 
 			if filter.MinRarity != "" {
-				parameters = append(parameters, fmt.Sprintf("Min rarity `%s`", filter.MinRarity))
+				parameters = append(parameters, fmt.Sprintf("**Min rarity** `%s`", filter.MinRarity))
 			}
 
 			if filter.MaxRarity != "" {
-				parameters = append(parameters, fmt.Sprintf("Max rarity `%s`", filter.MaxRarity))
+				parameters = append(parameters, fmt.Sprintf("**Max rarity** `%s`", filter.MaxRarity))
 			}
 
 			if len(filter.Types) > 0 {
-				parameters = append(parameters, fmt.Sprintf("Types `%s`", strings.Join(types, ", ")))
+				parameters = append(parameters, fmt.Sprintf("**Types** `%s`", strings.Join(types, ", ")))
 			}
 
 			sprites := make([]string, 0, len(result.Cards))
@@ -130,8 +128,7 @@ func (c *cmd) drawCards() api.Command {
 				sprites = append(sprites, card.PokemonAttr.SpriteURL)
 			}
 
-			content := fmt.Sprintf(headingPattern, len(result.Cards))
-			content += fmt.Sprintf(cardsPattern, strings.Join(parameters, " • "), format.List(result.Cards))
+			content := fmt.Sprintf(pattern, strings.Join(parameters, " • "), len(result.Cards), format.List(result.Cards))
 
 			return api.Response{
 				Content:   content,
