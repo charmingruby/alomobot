@@ -3,14 +3,14 @@ package booster
 type Rarity string
 
 const (
-	CommonRarity    Rarity = "common"
-	UncommonRarity  Rarity = "uncommon"
-	RareRarity      Rarity = "rare"
-	EpicRarity      Rarity = "epic"
-	LegendaryRarity Rarity = "legendary"
+	CommonRarity    Rarity = "Common"
+	UncommonRarity  Rarity = "Uncommon"
+	RareRarity      Rarity = "Rare"
+	EpicRarity      Rarity = "Epic"
+	LegendaryRarity Rarity = "Legendary"
 )
 
-var rarities = []Rarity{
+var Rarities = []Rarity{
 	CommonRarity,
 	UncommonRarity,
 	RareRarity,

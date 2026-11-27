@@ -17,10 +17,10 @@ const (
 type SupportMechanic string
 
 const (
-	CaptureMechanic        SupportMechanic = "capture"
-	RenewalRiskMechanic    SupportMechanic = "renewal_risk"
-	TypeSpecialistMechanic SupportMechanic = "type_specialist"
-	SynergyMechanic        SupportMechanic = "synergy"
+	CaptureMechanic        SupportMechanic = "Capture"
+	RenewalRiskMechanic    SupportMechanic = "Renewal Risk"
+	TypeSpecialistMechanic SupportMechanic = "Type Specialist"
+	SynergyMechanic        SupportMechanic = "Synergy"
 )
 
 type SupportAttr struct {

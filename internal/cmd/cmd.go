@@ -20,6 +20,7 @@ func Commands(app *app.App) []api.Command {
 			Description: "Opens boosters and searches set cards",
 			Subcommands: []api.Command{
 				c.openBooster(),
+				c.drawCards(),
 				{
 					Name:        "search",
 					Description: "Searches cards by set, name, rarity and type",

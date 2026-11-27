@@ -11,5 +11,6 @@ var Sets = map[booster.SetName]booster.Set{
 
 func FindSet(name string) (booster.Set, bool) {
 	selected, ok := Sets[booster.SetName(name)]
+
 	return selected, ok
 }

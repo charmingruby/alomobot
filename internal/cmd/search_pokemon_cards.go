@@ -17,14 +17,22 @@ import (
 )
 
 func (c *cmd) searchPokemonCards() api.Command {
-	choices := make([]api.Choice, 0, len(set.Sets))
+	setChoices := make([]api.Choice, 0, len(set.Sets))
 	for name := range set.Sets {
-		choices = append(choices, api.Choice{Name: string(name), Value: string(name)})
+		setChoices = append(setChoices, api.Choice{Name: string(name), Value: string(name)})
 	}
 
-	types := make([]api.Choice, 0, len(pkmn.Types))
+	rarityChoices := make([]api.Choice, 0, len(booster.Rarities))
+	for _, rarity := range booster.Rarities {
+		rarityChoices = append(rarityChoices, api.Choice{
+			Name:  string(rarity),
+			Value: string(rarity),
+		})
+	}
+
+	typeChoices := make([]api.Choice, 0, len(pkmn.Types))
 	for _, kind := range pkmn.Types {
-		types = append(types, api.Choice{Name: format.Capitalize(kind.String()), Value: kind.String()})
+		typeChoices = append(typeChoices, api.Choice{Name: format.Capitalize(kind.String()), Value: kind.String()})
 	}
 
 	return api.Command{
@@ -33,7 +41,7 @@ func (c *cmd) searchPokemonCards() api.Command {
 		Parameters: []api.Parameter{
 			{
 				Type: api.ParameterString, Name: "set",
-				Description: "Set to browse", Required: true, Choices: choices,
+				Description: "Set to browse", Required: true, Choices: setChoices,
 			},
 			{
 				Type: api.ParameterString, Name: "name",
@@ -42,13 +50,7 @@ func (c *cmd) searchPokemonCards() api.Command {
 			{
 				Type: api.ParameterString, Name: "rarity",
 				Description: "Card rarity; omit to show all rarities",
-				Choices: []api.Choice{
-					{Name: "Common", Value: string(booster.CommonRarity)},
-					{Name: "Uncommon", Value: string(booster.UncommonRarity)},
-					{Name: "Rare", Value: string(booster.RareRarity)},
-					{Name: "Epic", Value: string(booster.EpicRarity)},
-					{Name: "Legendary", Value: string(booster.LegendaryRarity)},
-				},
+				Choices:     rarityChoices,
 			},
 			{
 				Type: api.ParameterInteger, Name: "page",
@@ -56,7 +58,7 @@ func (c *cmd) searchPokemonCards() api.Command {
 			},
 			{
 				Type: api.ParameterString, Name: "type",
-				Description: "Pokémon typing; matches either primary or secondary type", Choices: types,
+				Description: "Pokémon typing; matches either primary or secondary type", Choices: typeChoices,
 			},
 		},
 		Handler: func(ctx context.Context, i api.Interaction) (api.Response, error) {
