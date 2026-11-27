@@ -65,15 +65,17 @@ func (c Card) Render() string {
 			content += fmt.Sprintf(" / %s", c.PokemonAttr.SecondaryType.Render())
 		}
 	case SupportCardType:
-		content += fmt.Sprintf(": _%s_", c.SupportAttr.Effect)
+		description := c.SupportAttr.Effect
 		if c.SupportAttr.Condition != "" {
-			content += fmt.Sprintf("\nCondition: %s", c.SupportAttr.Condition)
+			description = c.SupportAttr.Condition + " " + description
 		}
+		content += fmt.Sprintf(": _%s_", description)
 	case EnergyCardType:
-		content += fmt.Sprintf(": _%s_", c.EnergyAttr.Effect)
+		description := c.EnergyAttr.Effect
 		if c.EnergyAttr.Condition != "" {
-			content += fmt.Sprintf("\nCondition: %s", c.EnergyAttr.Condition)
+			description = c.EnergyAttr.Condition + " " + description
 		}
+		content += fmt.Sprintf(": _%s_", description)
 	}
 
 	return content
