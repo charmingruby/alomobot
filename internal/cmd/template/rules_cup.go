@@ -27,6 +27,6 @@ The global rules apply to every tournament unless its rules explicitly state oth
 		c.Guide.HowItWorks,
 		c.Guide.Restrictions,
 		c.Guide.TeamBuilding,
-		"`/rules global`",
+		"`/cup rules`",
 	)
 }

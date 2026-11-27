@@ -23,22 +23,27 @@ func (c *cmd) rulesCup() api.Command {
 	}
 
 	return api.Command{
-		Name:        "cup",
-		Description: "Explains how a cup works and how to build your team",
+		Name:        "rules",
+		Description: "Shows global rules or the rules for a selected cup",
 		Parameters: []api.Parameter{
 			{
 				Type:        api.ParameterString,
 				Name:        nameParam,
-				Description: "Cup you want to learn about",
-				Required:    true,
+				Description: "Cup you want to learn about; omit to see global rules",
+				Required:    false,
 				Choices:     choices,
 			},
 		},
 		Handler: func(ctx context.Context, i api.Interaction) (api.Response, error) {
-			selected, err := c.app.RulesCup(ctx, i.String(nameParam))
+			name := i.String(nameParam)
+			if name == "" {
+				return api.Response{Content: template.RulesGlobal()}, nil
+			}
+
+			selected, err := c.app.RulesCup(ctx, name)
 			if errors.Is(err, app.ErrCupNotFound) {
 				return api.Response{
-					Content: "Cup not found. Select one of the available cups in `/rules cup`.",
+					Content: "Cup not found. Select one of the available cups in `/cup rules`.",
 				}, nil
 			}
 

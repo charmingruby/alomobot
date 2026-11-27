@@ -33,14 +33,6 @@ func Commands(app *app.App) []api.Command {
 			},
 		},
 		{
-			Name:        "rules",
-			Description: "Explains tournament rules and formats",
-			Subcommands: []api.Command{
-				c.rulesGlobal(),
-				c.rulesCup(),
-			},
-		},
-		{
 			Name:        "pokemon",
 			Description: "Pokémon commands",
 			Subcommands: []api.Command{
@@ -59,6 +51,7 @@ func Commands(app *app.App) []api.Command {
 			Description: "Tournament cup commands",
 			Subcommands: []api.Command{
 				c.flipCup(),
+				c.rulesCup(),
 			},
 		},
 		{
