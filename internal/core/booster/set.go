@@ -31,7 +31,7 @@ type Set struct {
 	SupportCards  []Card
 	EnergyCards   []Card
 	Slots         []Slot
-	RarityWeights map[Rarity]int
+	RarityWeights map[Rarity]float64
 }
 
 type DrawFilter struct {
@@ -87,7 +87,7 @@ func (s *Set) Open(ctx context.Context) ([]Card, error) {
 
 		minRarity := max(0, slices.Index(Rarities, slot.MinRarity))
 		eligible := make(map[Rarity][]Card)
-		totalWeight := 0
+		totalWeight := 0.0
 
 		// Filter the cards allowed in this slot.
 		for _, card := range pool {
@@ -141,7 +141,7 @@ func (s Set) Draw(ctx context.Context, filter DrawFilter) ([]Card, error) {
 
 	eligible := make(map[Rarity][]Card)
 	seen := make(map[string]bool)
-	totalWeight, count := 0, 0
+	totalWeight, count := 0.0, 0
 
 	for _, card := range s.PokemonCards {
 		rank := slices.Index(Rarities, card.Rarity)
@@ -201,12 +201,12 @@ func (s Set) Draw(ctx context.Context, filter DrawFilter) ([]Card, error) {
 
 // drawWeighted draws a rarity by weight, then a card uniformly within that rarity.
 // The returned card's attributes are independent of the set's catalog.
-func (s Set) drawWeighted(eligible map[Rarity][]Card, totalWeight int) (Card, error) {
+func (s Set) drawWeighted(eligible map[Rarity][]Card, totalWeight float64) (Card, error) {
 	if totalWeight <= 0 {
 		return Card{}, errors.New("total rarity weight must be positive")
 	}
 
-	roll := rand.IntN(totalWeight)
+	roll := rand.Float64() * totalWeight
 
 	for _, rarity := range Rarities {
 		candidates := eligible[rarity]

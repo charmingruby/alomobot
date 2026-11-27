@@ -43,7 +43,7 @@ func New() *Ucraine {
 					Types: []booster.CardType{booster.EnergyCardType, booster.SupportCardType},
 				},
 			},
-			RarityWeights: map[booster.Rarity]int{
+			RarityWeights: map[booster.Rarity]float64{
 				booster.CommonRarity:    35,
 				booster.UncommonRarity:  25,
 				booster.RareRarity:      20,
