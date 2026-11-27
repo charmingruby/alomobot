@@ -1,32 +1,30 @@
 package cup
 
-import "slices"
-
 type GuideCup struct {
 	HowItWorks   string
 	Restrictions string
 	TeamBuilding string
 }
 
-type NameCup string
+type CupName string
 
 type Cup struct {
-	Name  NameCup
+	Name  CupName
 	Guide GuideCup
 }
 
-var Cups = []Cup{
-	littleCup,
-	letterCup,
-	rentalCup,
-	monogenCup,
-	monotypeCup,
-	randomPartyCup,
-	boosterCup,
-	noEvoCup,
-	singleTypeCup,
-	standardCup,
-	starterCup,
+var Cups = map[CupName]Cup{
+	LittleCup:      littleCup,
+	LetterCup:      letterCup,
+	RentalCup:      rentalCup,
+	MonogenCup:     monogenCup,
+	MonotypeCup:    monotypeCup,
+	RandomPartyCup: randomPartyCup,
+	BoosterCup:     boosterCup,
+	NoEvoCup:       noEvoCup,
+	SingleTypeCup:  singleTypeCup,
+	StandardCup:    standardCup,
+	StarterCup:     starterCup,
 }
 
 func (c Cup) String() string {
@@ -38,24 +36,11 @@ func (c Cup) Render() string {
 }
 
 func (c Cup) Valid() bool {
-	switch c.Name {
-	case LittleCup, LetterCup, RentalCup, MonogenCup, MonotypeCup,
-		RandomPartyCup, BoosterCup, NoEvoCup, SingleTypeCup, StandardCup,
-		StarterCup:
-		return true
-	default:
-		return false
-	}
+	_, ok := FindCup(c.String())
+	return ok
 }
 
 func FindCup(name string) (Cup, bool) {
-	index := slices.IndexFunc(Cups, func(c Cup) bool {
-		return c.Name == NameCup(name)
-	})
-
-	if index < 0 {
-		return Cup{}, false
-	}
-
-	return Cups[index], true
+	selected, ok := Cups[CupName(name)]
+	return selected, ok
 }

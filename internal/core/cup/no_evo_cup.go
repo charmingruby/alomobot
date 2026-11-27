@@ -1,6 +1,6 @@
 package cup
 
-const NoEvoCup NameCup = "No Evo"
+const NoEvoCup CupName = "No Evo"
 
 var noEvoCup = Cup{
 	Name: NoEvoCup,

@@ -16,22 +16,62 @@ func Commands(app *app.App) []api.Command {
 
 	return []api.Command{
 		{
-			Name:        "rules",
-			Description: "Explains tournament rules and formats",
+			Name:        "booster",
+			Description: "Opens boosters and searches set cards",
 			Subcommands: []api.Command{
-				c.rulesGlobal(),
+				c.openBooster(),
+				c.drawCards(),
+				{
+					Name:        "search",
+					Description: "Searches cards by set, name, rarity and type",
+					Subcommands: []api.Command{
+						c.searchPokemonCards(),
+						c.searchSupportCards(),
+						c.searchEnergyCards(),
+					},
+				},
+			},
+		},
+		{
+			Name:        "pokemon",
+			Description: "Pokémon commands",
+			Subcommands: []api.Command{
+				c.flipPokemon(),
+			},
+		},
+		{
+			Name:        "type",
+			Description: "Pokémon type commands",
+			Subcommands: []api.Command{
+				c.flipType(),
+			},
+		},
+		{
+			Name:        "cup",
+			Description: "Tournament cup commands",
+			Subcommands: []api.Command{
+				c.flipCup(),
 				c.rulesCup(),
 			},
 		},
 		{
-			Name:        "flip",
-			Description: "Flips random Pokémon resources",
+			Name:        "party",
+			Description: "Pokémon party commands",
 			Subcommands: []api.Command{
-				c.flipType(),
-				c.flipCup(),
-				c.flipPokemon(),
 				c.flipParty(),
+			},
+		},
+		{
+			Name:        "gen",
+			Description: "Pokémon generation commands",
+			Subcommands: []api.Command{
 				c.flipGen(),
+			},
+		},
+		{
+			Name:        "league",
+			Description: "Tournament league commands",
+			Subcommands: []api.Command{
 				c.flipLeague(),
 			},
 		},

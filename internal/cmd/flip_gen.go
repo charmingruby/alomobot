@@ -10,7 +10,7 @@ import (
 
 func (c *cmd) flipGen() api.Command {
 	return api.Command{
-		Name:        "gen",
+		Name:        "flip",
 		Description: "Flips a random Pokémon gen",
 		Handler: func(ctx context.Context, _ api.Interaction) (api.Response, error) {
 			return api.Response{Content: template.Flip("generation", c.app.FlipGen(ctx).Render())}, nil

@@ -1,6 +1,6 @@
 package cup
 
-const RandomPartyCup NameCup = "Random Party"
+const RandomPartyCup CupName = "Random Party"
 
 var randomPartyCup = Cup{
 	Name: RandomPartyCup,

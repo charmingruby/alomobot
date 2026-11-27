@@ -20,9 +20,9 @@ func (p Pokemon) Render() string {
 		typeContent += fmt.Sprintf(" / %s", p.SecondaryType.Render())
 	}
 
-	return fmt.Sprintf("**#%d — %s** • %s",
-		p.ID,
+	return fmt.Sprintf("**%s** (`#%d`) • %s",
 		format.Capitalize(p.Name),
+		p.ID,
 		typeContent,
 	)
 }

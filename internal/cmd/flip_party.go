@@ -23,7 +23,7 @@ func (c *cmd) flipParty() api.Command {
 	)
 
 	return api.Command{
-		Name:        "party",
+		Name:        "flip",
 		Description: "Flips a random Pokémon party",
 		Parameters: []api.Parameter{
 			{

@@ -10,7 +10,7 @@ import (
 
 func (c *cmd) flipCup() api.Command {
 	return api.Command{
-		Name:        "cup",
+		Name:        "flip",
 		Description: "Flips a random cup",
 		Handler: func(ctx context.Context, _ api.Interaction) (api.Response, error) {
 			return api.Response{Content: template.Flip("cup", c.app.FlipCup(ctx).String())}, nil

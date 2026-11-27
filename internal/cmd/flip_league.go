@@ -20,7 +20,7 @@ func (c *cmd) flipLeague() api.Command {
 	)
 
 	return api.Command{
-		Name:        "league",
+		Name:        "flip",
 		Description: "Flips a random league of cups",
 		Parameters: []api.Parameter{
 			{

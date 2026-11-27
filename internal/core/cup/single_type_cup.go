@@ -1,6 +1,6 @@
 package cup
 
-const SingleTypeCup NameCup = "Single Type"
+const SingleTypeCup CupName = "Single Type"
 
 var singleTypeCup = Cup{
 	Name: SingleTypeCup,
