@@ -25,6 +25,7 @@ var Cups = map[CupName]Cup{
 	SingleTypeCup:  singleTypeCup,
 	StandardCup:    standardCup,
 	StarterCup:     starterCup,
+	ShinyCup:       shinyCup,
 }
 
 func (c Cup) String() string {
