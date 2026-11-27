@@ -3,6 +3,7 @@ package app
 import (
 	"context"
 	"errors"
+	"strconv"
 
 	"github.com/charmingruby/alomobot/internal/core/booster"
 	"github.com/charmingruby/alomobot/internal/core/booster/set"
@@ -28,7 +29,7 @@ func (a *App) OpenBooster(ctx context.Context, name string) (OpenBoosterResult, 
 
 	for _, card := range cards {
 		if card.Type == booster.PokemonCardType {
-			pokemon, err := a.api.GetPokemonByDexID(ctx, card.PokemonAttr.ID)
+			pokemon, err := a.api.GetPokemon(ctx, strconv.Itoa(card.PokemonAttr.ID))
 			if err != nil {
 				return OpenBoosterResult{}, err
 			}

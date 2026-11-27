@@ -1,18 +1,9 @@
 package app
 
-import (
-	"context"
-
-	"github.com/charmingruby/alomobot/internal/core/pkmn"
-	"github.com/charmingruby/alomobot/internal/core/pkmn/pokeapi"
-)
-
-type pokemonAPI interface {
-	GetPokemonByDexID(context.Context, int) (pkmn.Pokemon, error)
-}
+import "github.com/charmingruby/alomobot/internal/core/pkmn/pokeapi"
 
 type App struct {
-	api pokemonAPI
+	api *pokeapi.PokeAPI
 }
 
 func New(api *pokeapi.PokeAPI) *App {

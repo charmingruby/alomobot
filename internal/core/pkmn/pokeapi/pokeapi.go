@@ -5,6 +5,8 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"net/url"
+	"strings"
 
 	"github.com/charmingruby/erebor/httpx"
 	"github.com/charmingruby/erebor/o11y/logging"
@@ -13,7 +15,7 @@ import (
 	"github.com/charmingruby/alomobot/internal/core/pkmn/pokeapi/data"
 )
 
-const url = "https://pokeapi.co/api/v2"
+const baseURL = "https://pokeapi.co/api/v2"
 
 var (
 	ErrPokemonNotFound = errors.New("pokemon not found")
@@ -25,18 +27,19 @@ type PokeAPI struct {
 
 func New() *PokeAPI {
 	return &PokeAPI{
-		client: httpx.NewClient(httpx.WithBaseURL(url)),
+		client: httpx.NewClient(httpx.WithBaseURL(baseURL)),
 	}
 }
 
-func (p *PokeAPI) GetPokemonByDexID(ctx context.Context, dexID int) (pkmn.Pokemon, error) {
+// GetPokemon looks up a Pokémon by its PokéAPI name or numeric ID.
+func (p *PokeAPI) GetPokemon(ctx context.Context, identifier string) (pkmn.Pokemon, error) {
 	poke, err := httpx.Do[data.Pokemon](ctx, p.client, httpx.Request{
-		URL:            fmt.Sprintf("/pokemon/%d", dexID),
+		URL:            "/pokemon/" + url.PathEscape(strings.ToLower(strings.TrimSpace(identifier))),
 		ExpectedStatus: http.StatusOK,
 	})
 
 	if err != nil {
-		logging.LoggerFromContext(ctx).ErrorContext(ctx, "pokemon not found by dex id",
+		logging.LoggerFromContext(ctx).ErrorContext(ctx, "pokemon lookup failed",
 			"error", err,
 		)
 

@@ -16,6 +16,13 @@ func Commands(app *app.App) []api.Command {
 
 	return []api.Command{
 		{
+			Name:        "pool",
+			Description: "Pokémon pool commands",
+			Subcommands: []api.Command{
+				c.flipPool(),
+			},
+		},
+		{
 			Name:        "booster",
 			Description: "Opens boosters and searches set cards",
 			Subcommands: []api.Command{

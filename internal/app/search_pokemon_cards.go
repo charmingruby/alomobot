@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"slices"
+	"strconv"
 	"strings"
 
 	"github.com/charmingruby/alomobot/internal/core/booster"
@@ -66,7 +67,7 @@ func (a *App) SearchPokemonCards(ctx context.Context, filter SearchPokemonCardsF
 		cards = cards[:1]
 		filter.Page = 1
 
-		pokemon, err := a.api.GetPokemonByDexID(ctx, cards[0].PokemonAttr.ID)
+		pokemon, err := a.api.GetPokemon(ctx, strconv.Itoa(cards[0].PokemonAttr.ID))
 		if err != nil {
 			return SearchPokemonCardsResult{}, err
 		}

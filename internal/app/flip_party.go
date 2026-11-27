@@ -2,6 +2,7 @@ package app
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/charmingruby/alomobot/internal/core/pkmn"
 )
@@ -18,7 +19,7 @@ func (a *App) FlipParty(ctx context.Context, filter FlipPartyFilter) ([]pkmn.Pok
 	unique := make(map[int]struct{}, partySize)
 
 	for len(party) < partySize || len(bench) < filter.Bench {
-		p, err := a.api.GetPokemonByDexID(ctx, pkmn.RandomNationalDexID())
+		p, err := a.api.GetPokemon(ctx, strconv.Itoa(pkmn.RandomNationalDexID()))
 		if err != nil {
 			return nil, nil, err
 		}

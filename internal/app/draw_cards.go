@@ -2,6 +2,7 @@ package app
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/charmingruby/alomobot/internal/core/booster"
 	"github.com/charmingruby/alomobot/internal/core/booster/set"
@@ -29,7 +30,7 @@ func (a *App) DrawCards(ctx context.Context, filter DrawCardsFilter) (DrawCardsR
 	}
 
 	for _, card := range cards {
-		pokemon, err := a.api.GetPokemonByDexID(ctx, card.PokemonAttr.ID)
+		pokemon, err := a.api.GetPokemon(ctx, strconv.Itoa(card.PokemonAttr.ID))
 		if err != nil {
 			return DrawCardsResult{}, err
 		}
